@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: emqx
+	  app: emqx
   template:
     metadata:
       labels:
@@ -20,14 +20,14 @@ spec:
         ports:
         - name: mqtt
           containerPort: 1883
-        - name: mqttssl
-          containerPort: 8883
-        - name: mgmt
-          containerPort: 8081
-        - name: ws
-          containerPort: 8083
-        - name: wss
-          containerPort: 8084
+        #- name: mqttssl
+        #  containerPort: 8883
+        #- name: mgmt
+        #  containerPort: 8081
+        #- name: ws
+        #  containerPort: 8083
+        #- name: wss
+        #  containerPort: 8084
         - name: dashboard
           containerPort: 18083
 ---
@@ -38,29 +38,29 @@ metadata:
 spec:
   selector:
     app: emqx
+  type: NodePort
   ports:
     - name: mqtt
-	  type: NodePort
 	  nodePort: 30883
       port: 1883
       protocol: TCP
       targetPort: mqtt
-    - name: mqttssl
-      port: 8883
-      protocol: TCP
-      targetPort: mqttssl
-    - name: mgmt
-      port: 8081
-      protocol: TCP
-      targetPort: mgmt
-    - name: ws
-      port: 8083
-      protocol: TCP
-      targetPort: ws
-    - name: wss
-      port: 8084
-      protocol: TCP
-      targetPort: wss
+    #- name: mqttssl
+    #  port: 8883
+    #  protocol: TCP
+    #  targetPort: mqttssl
+    #- name: mgmt
+    #  port: 8081
+    #  protocol: TCP
+    #  targetPort: mgmt
+    #- name: ws
+    #  port: 8083
+    #  protocol: TCP
+    #  targetPort: ws
+    #- name: wss
+    #  port: 8084
+    #  protocol: TCP
+    #  targetPort: wss
     - name: dashboard
 	  type: NodePort
 	  nodePort: 38083
