@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emqx
+  labels:
+    app: emqx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emqx
+  template:
+    metadata:
+      labels:
+        app: emqx
+    spec:
+      containers:
+      - name: emqx
+        image: emqx:5.4
+        ports:
+        - name: mqtt
+          containerPort: 1883
+        - name: mqttssl
+          containerPort: 8883
+        - name: mgmt
+          containerPort: 8081
+        - name: ws
+          containerPort: 8083
+        - name: wss
+          containerPort: 8084
+        - name: dashboard
+          containerPort: 18083
+        volumeMounts:
+          - name: emqx-persistent-storage
+            mountPath: /var/lib/emqx
+          - name: emqx-config
+            mountPath: /opt/emqx/etc/emqx.conf
+            subPath: emqx.conf
+      volumes:
+        - name: emqx-config
+          configMap:
+            name: emqx-config
+        - name: emqx-persistent-storage
+          persistentVolumeClaim:
+            claimName: emqx-pvc

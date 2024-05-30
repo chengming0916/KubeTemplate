@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: emqx-config
+data:
+  emqx.conf: |
+    node {
+      name = "EMQX@202"
+      cookie = "emqxsecretcookie"
+      data_dir="/var/lib/emqx"
+    }
+    cluster {
+      name = emqxcl
+      discovery_strategy = manual
+    }
+
+    dashboard {
+        listeners.http {
+          bind = "0.0.0.0:18083"
+        }
+    }
+
+    authentication = {
+        mechanism = password_based
+        backend = built_in_database
+        enable = true
+
+        user_id_type = username
+        password_hash_algorithm {
+            name = sha256
+            salt_position = suffix
+        }
+    }
+
+    listeners.tcp.default {
+        enabled = true
+        bind = 1883
+    }
+
+    listeners.ws.default {
+       enabled = true
+    }
