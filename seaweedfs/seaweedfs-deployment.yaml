@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seaweed
+  labels:
+    app: seaweed
+spec:
+  selector:
+    matchLabels:
+      app: seaweed
+  template:
+    metadata:
+      labels:
+        app: seaweed
+    spec:
+      containers:
+        - name: seaweed
+          image: chrislusf/seaweedfs:latest
+          command: ["weed", "server", "filer"]
+          ports:
+            - name: master-port
+              containerPort: 9333
+            - name: filter-port
+              containerPort: 8888
+          volumeMounts:
+            - name: seaweedfs-persistent-storage
+              mountPath: /data
+      volumes:
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+        - name: seaweedfs-persistent-storage
+          persistentVolumeClaim:
+            claimName: seaweedfs-pvc
+          #persistentVolumeCliam:
+          #  claimName: seaweedfs-pvc
+        #- name: seaweed-config
+        #  configMap:
+        #    name: seaweed-config
