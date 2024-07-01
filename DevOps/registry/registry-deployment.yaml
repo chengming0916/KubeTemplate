@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels
+  labels:
     app: registry
   name: registry
 spec:
@@ -22,7 +22,7 @@ spec:
         volumeMounts:
         - name: timezone
           mountPath: /etc/localtime
-        - name: registry
+        - name: registry-presistent-storage
           mountPath: /var/lib/registry
           
       volumes:
