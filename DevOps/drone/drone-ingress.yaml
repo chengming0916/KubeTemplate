@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: drone-ingress
+  namespace: drone
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: PathPrefix(`/drone`)
+      kind: Rule
+      services:
+        - name: drone
+          port: 8080
