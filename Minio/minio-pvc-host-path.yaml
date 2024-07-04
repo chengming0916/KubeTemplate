@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-pv
+  labels:
+    app: minio
+spec:
+  storageClassName: minio-persistent-storage
+  capacity:
+    storge: 5Gi
+  accessModes:
+  - ReadWriteMany
+  hostPath:
+    path: /var/lib/minio/data
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-pvc
+  labels:
+    app: minio
+spec:
+  storageClassName: minio-persistent-storage
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storge: 5Gi
