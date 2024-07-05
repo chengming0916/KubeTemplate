@@ -2,7 +2,9 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: gitea-ingress
-  namespace: gitea
+  namespace: devops
+  labels:
+    app: gitea
 spec:
   entryPoints:
     - web

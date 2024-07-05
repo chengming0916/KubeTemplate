@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitea
+  namespace: devops
+  labels:
+    app: gitea
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitea
+  template:
+    metadata:
+      labels:
+        app: gitea
+    spec:
+      containers:
+      - name: gitea
+        image: gitea/gitea:1.22.0-rootless
+        env:
+        - name: SSH_LISTEN_PORT
+          value: "2222"
+        - name: SSH_PORT
+          value: "22"
+        - name: GITEA_APP_INI
+          value: /data/gitea/conf/app.ini
+        - name: GITEA_CUSTOM
+          value: /data/gitea
+        - name: GITEA_WORK_DIR
+          value: /data
+        - name: GITEA_TEMP
+          value: /tmp/gitea
+        - name: TMPDIR
+          value: /tmp/gitea
+        - name: HOME
+          value: /data/gitea/git
+        #- name: ROOT_URL
+        #  value: ""
+        - name: APP_NAME
+          value: "Gitea: Git with a cup of tea"
+        - name: RUN_MODE
+          value: prod
+        - name: DB_TYPE
+          value: postgres
+        - name: DB_HOST
+          value: devops/postgres:5432
+        - name: DB_NAME
+          value: gitea
+        - name: DB_USER
+          value: gitea
+        - name: DB_PASSWD
+          value: gitea
+
+        imagePullPolicy: IfNotPresent
+
+        ports:
+        - containerPort: 22
+          name: ssh
+          protocol: TCP
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: temp
+        - mountPath: /data
+          name: gitea-persistent-storage
+        #- mountPath: /data/gitea/conf/
+        #  name: gitea-config
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+      terminationGracePeriodSeconds: 60
+      volumes:
+      - name: temp
+        emptyDir: {}
+      - name: gitea-persistent-storage
+        persistentVolumeClaim:
+          claimName: gitea-pvc
+      #- name: gitea-config
+      #  configMap:
+      #    name: gitea-config
+
+
