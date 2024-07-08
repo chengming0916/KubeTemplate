@@ -2,6 +2,5 @@ mirrors:
   "docker.io":
     endpoint:
       - "https://docker.m.daocloud.cn"
-      - "https://mirror.swr.myhuaweicloud.com"
-      - "https://mirror.ccs.tencentyun.com"
-      - "https://registry.cn-hangzhou.aliyuncs.com"
+      - "https://registry-1.docker.io"
+
