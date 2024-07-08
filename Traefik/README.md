@@ -20,3 +20,5 @@ kubectl apply -f traefik-service.yaml
 ```
 kubectl apply -f traefik-ingress.yaml
 ```
+
+证书配置参考../DevOps/cert-manager
