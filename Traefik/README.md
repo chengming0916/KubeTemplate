@@ -10,8 +10,13 @@ sudo cp traefik-config.yaml /var/lib/rancher/k3s/server/manifests/
 sudo systemctl restart k3s.service
 ```
 
-然后配置traefik dashboard
+然后配置traefik service
 
 ```
-kubectl apply -f traefik-dashboard.yaml
+kubectl apply -f traefik-service.yaml
+```
+
+最后配置IngressRoute
+```
+kubectl apply -f traefik-ingress.yaml
 ```
