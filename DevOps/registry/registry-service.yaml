@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: registry
+  namespace: devops
   labels:
     app: registry
 spec:

@@ -2,10 +2,13 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: registry-pvc
+  namespace: devops
+  labels:
+    app: registry
 spec:
   accessModes:
   - ReadWriteOnce
   storageClassName: local-path
   resources:
     requests:
-      storage: 20Gi
+      storage: 100Gi
