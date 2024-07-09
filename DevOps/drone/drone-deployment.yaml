@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone
+  namespace: devops
+  labels:
+    app: drone
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drone
+  template:
+    metadata:
+      labels:
+        app: drone
+    spec:
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: drone
+        image: docker.io/drone/drone:2.12.1
+        imagePullPolicy: IfNotPresent
+        name: server
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /data
+          name: storage-volume
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      serviceAccount: drone
+      serviceAccountName: drone
+      volumes:
+      - name: storage-volume
+        persistentVolumeClaim:
+          claimName: drone
