@@ -39,7 +39,7 @@ spec:
           terminationMessagePolicy: File
           volumeMounts:
             - name: redis-persistent-storage
-              mountPath: /opt/emqx/data
+              mountPath: /var/lib/redis
             - name: redis-config
               mountPath: /usr/local/etc/redis/redis.conf
               subPath: redis.conf
