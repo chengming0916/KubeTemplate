@@ -44,7 +44,7 @@ spec:
         - name: DB_TYPE
           value: postgres
         - name: DB_HOST
-          value: devops/postgres:5432
+          value: postgres:5432
         - name: DB_NAME
           value: gitea
         - name: DB_USER
