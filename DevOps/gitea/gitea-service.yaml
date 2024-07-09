@@ -9,11 +9,12 @@ spec:
   ports:
   - name: ssh
     port: 22
+    nodePort: 2022 
     protocol: TCP
     targetPort: 22
   selector:
     app: gitea
-  type: ClusterIP
+  type: NodePort
 
 ---
 
@@ -28,8 +29,9 @@ spec:
   ports:
   - name: http
     port: 3000
+    nodePort: 3000
     protocol: TCP
     targetPort: 3000
   selector:
     app: gitea
-  type: ClusterIP
+  type: NodePort
