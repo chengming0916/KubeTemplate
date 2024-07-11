@@ -1,0 +1,28 @@
+expose:
+  type: ingress
+  tls:
+    enabled: true
+    certSource: secret
+    secret:
+      secretName: "harbor-tls"
+      notarySecretName: "harbor-tls"
+  ingress:
+    hosts:
+      core: harbor.tjpengan.io
+      notary: notary.tjpengan.io
+    controller: default
+    annotations:
+      ingress.kubernetes.io/ssl-redirect: "true"
+      ingress.kubernetes.io/proxy-body-size: "0"
+      kubernetes.io/ingress.class: "traefik"
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+
+externalURL: https://harbor.tjpengan.io # 注意此处地址必需与ingress.hosts.core一致
+
+harborAdminPassword: "Harbor123456"
+
+logLevel: info
+
+chartmuseum:
+  enabled: true

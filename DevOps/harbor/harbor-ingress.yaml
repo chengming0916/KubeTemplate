@@ -1,14 +1,89 @@
-apiVersion: traefik.io/v1alpha1
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: harbor-ingress
-  namespace: harbor
+  namespace: kube-ops
+  name: harbor-http
 spec:
   entryPoints:
     - web
   routes:
-    - match: PathPrefix(`/harbor`)
+    - match: Host(`harbor.example.com`) && PathPrefix(`/`)
       kind: Rule
       services:
         - name: harbor-portal
+          port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  namespace: kube-ops
+  name: harbor-api
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`harbor.example.com`) && PathPrefix(`/api`)
+      kind: Rule
+      services:
+        - name: harbor-core
+          port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  namespace: kube-ops
+  name: harbor-service
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`harbor.example.com`) && PathPrefix(`/service`)
+      kind: Rule
+      services:
+        - name: harbor-core
+          port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  namespace: kube-ops
+  name: harbor-v2
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`harbor.example.com`) && PathPrefix(`/v2`)
+      kind: Rule
+      services:
+        - name: harbor-core
+          port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  namespace: kube-ops
+  name: harbor-chartrepo
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`harbor.example.com`) && PathPrefix(`/chartrepo`)
+      kind: Rule
+      services:
+        - name: harbor-core
+          port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  namespace: kube-ops
+  name: harbor-c
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`harbor.example.com`) && PathPrefix(`/c`)
+      kind: Rule
+      services:
+        - name: harbor-core
           port: 80

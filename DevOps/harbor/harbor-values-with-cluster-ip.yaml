@@ -1,0 +1,17 @@
+expose:
+  type: ClusterIP
+  tls:
+    enabled: true
+    certSource: secret
+    secret:
+      secretName: "harbor-tls"
+      notarySecretName: "harbor-tls"
+
+externalURL: https://harbor.example.io 
+
+harborAdminPassword: "Harbor123456"
+
+logLevel: info
+
+chartmuseum:
+  enabled: true

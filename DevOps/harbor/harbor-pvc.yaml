@@ -1,0 +1,107 @@
+#harbor-registry-pvc
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: harbor-registry
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  # storageClassName: harbor-registry # 使用nfs
+  resources:
+    requests:
+      storage: 100Gi
+  selector:
+    matchLabels:
+      app: harbor-registry
+---
+#harbor-chartmuseum-pvc
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: harbor-chartmuseum
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  # storageClassName: harbor-chartmuseum # 使用nfs
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      app: harbor-chartmuseum
+---
+#harbor-jobservice-pvc
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: harbor-jobservice
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  # storageClassName: harbor-jobservice # 使用nfs
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      app: harbor-jobservice 
+---
+#harbor-database-pvc 使用 external database 可注释这一段
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: harbor-database
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  # storageClassName: harbor-database # 使用nfs
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      app: harbor-database  
+---
+#harbor-redis-pvc 使用external redis 可注释这一段
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: harbor-redis
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  # storageClassName: harbor-redis # 使用nfs
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      app: harbor-redis
+---
+#harbor-trivy-pvc
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: harbor-trivy
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  # storageClassName: harbor-trivy # 使用nfs
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      app: harbor-trivy
