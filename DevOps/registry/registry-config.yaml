@@ -24,7 +24,7 @@ data:
     # 账号密码
     auth:
       htpasswd:
-        realm: Registry Realm
+        realm: basic-realm
         path: /etc/registry/passwd
     health:
       storagedriver:
