@@ -3,4 +3,11 @@ mirrors:
     endpoint:
       - "https://docker.m.daocloud.io"
       - "https://registry-1.docker.io"
-
+#  "harbor.example.io":
+#    endpoint:
+#      - "https://harbor.example.io"
+#config_path:
+#  "harbor.example.io":
+#    auth:
+#      username: "harbor"
+#      password: "Harbor123456"
