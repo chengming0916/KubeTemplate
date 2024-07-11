@@ -200,5 +200,5 @@ mirrors:
 
 
 
-[Kubernetes1.21搭建harbor-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1872039)
+
 
