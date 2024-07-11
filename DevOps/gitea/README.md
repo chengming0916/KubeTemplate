@@ -1,5 +1,15 @@
 # 部署说明
 
+#### 依赖PostgreSQL
+```SQL
+// 创建用户
+CREATE USER gitea WITH PASSWORD 'gitea';
+
+// 创建数据库
+CREATE DATABASE gitea WITH OWNER gitea; 
+
+```
+
 #### NodePort方式暴露端口
 
 ```bash
