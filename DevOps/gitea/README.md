@@ -21,6 +21,6 @@ kubectl apply -f gitea-service.yaml
 #### Helm + Ingress 部署
 
 ```
-helm upgrade gitea gitea/gitea --namespace gitea --install --create-namespace
+helm upgrade gitea gitea/gitea --namespace gitea --install --create-namespace -f gotea-values.yaml
 ```
 
