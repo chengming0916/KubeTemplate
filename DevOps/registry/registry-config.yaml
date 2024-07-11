@@ -21,10 +21,16 @@ data:
       addr: :5000
       headers:
         X-Content-Type-Options: [nosniff]
+    # 账号密码
+    auth:
+      htpasswd:
+        realm: Registry Realm
+        path: /etc/registry/passwd
     health:
       storagedriver:
         enabled: true
         interval: 10s
         threshold: 3
+    # 上游代理
     proxy:
-      remoteurl: "https://mirror.swr.myhuaweicloud.com"
+      remoteurl: "https://docker.m.daocloud.io"
