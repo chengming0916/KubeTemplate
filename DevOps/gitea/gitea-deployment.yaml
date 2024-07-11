@@ -35,7 +35,11 @@ spec:
           value: /tmp/gitea
         - name: HOME
           value: /data/gitea/git
+        # Gitea服务器的对外 URL,决定git clone 的根地址  
         #- name: ROOT_URL
+        #  value: ""
+        # 服务器域名
+        #- name: DOMAIN
         #  value: ""
         - name: APP_NAME
           value: "Gitea: Git with a cup of tea"
