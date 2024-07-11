@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: kube-ops
+  namespace: harbor
   name: harbor-http
 spec:
   entryPoints:
@@ -16,7 +16,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: kube-ops
+  namespace: harbor
   name: harbor-api
 spec:
   entryPoints:
@@ -31,7 +31,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: kube-ops
+  namespace: harbor
   name: harbor-service
 spec:
   entryPoints:
@@ -46,7 +46,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: kube-ops
+  namespace: harbor
   name: harbor-v2
 spec:
   entryPoints:
@@ -61,7 +61,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: kube-ops
+  namespace: harbor
   name: harbor-chartrepo
 spec:
   entryPoints:
@@ -76,7 +76,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: kube-ops
+  namespace: harbor
   name: harbor-c
 spec:
   entryPoints:
