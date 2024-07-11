@@ -1,28 +1,162 @@
+#Ingress 网关入口配置
 expose:
   type: ingress
   tls:
+    # 是否启用 https 协议，如果不想启用 HTTPS，则可以设置为 false
     enabled: true
+    # 指定使用 sectet 挂载证书模式，且使用上面创建的 secret 资源
     certSource: secret
     secret:
       secretName: "harbor-tls"
       notarySecretName: "harbor-tls"
   ingress:
     hosts:
-      core: harbor.tjpengan.io
-      notary: notary.tjpengan.io
+      # 配置 Harbor 的访问域名，需要注意的是配置 notary 域名要和 core 处第一个单词外，其余保持一致
+      core: harbor.example.io
+      notary: notary.example.io
     controller: default
     annotations:
       ingress.kubernetes.io/ssl-redirect: "true"
       ingress.kubernetes.io/proxy-body-size: "0"
+      # 如果是 traefik ingress，则按下面配置：
       kubernetes.io/ingress.class: "traefik"
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      # 如果是 nginx ingress，则按下面配置：
+      #nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      #nginx.ingress.kubernetes.io/proxy-body-size: "0"
 
-externalURL: https://harbor.tjpengan.io # 注意此处地址必需与ingress.hosts.core一致
+# 如果Harbor部署在代理后，将其设置为代理的URL，这个值一般要和上面的 Ingress 配置的地址保存一致
+externalURL: https://harbor.example.io 
 
+# Harbor 各个组件的持久化配置，并设置各个组件 existingClaim 参数为上面创建的对应 PVC 名称
+persistence:
+  enabled: true
+  # 存储保留策略，当PVC、PV删除后，是否保留存储数据
+  resourcePolicy: "keep"    
+  persistentVolumeClaim:
+    registry:
+      existingClaim: "harbor-registry"
+      size: 100Gi
+    chartmuseum:
+      existingClaim: "harbor-chartmuseum"
+      size: 5Gi
+    jobservice:
+      existingClaim: "harbor-jobservice"
+      size: 5Gi
+    # 如果使用外部数据库可注释此部分
+    database:
+      existingClaim: "harbor-database"
+      size: 5Gi
+    # 如果使用外部Redis服务可注释此部分
+    redis:
+      existingClaim: "harbor-redis"
+      size: 5Gi
+    trivy:
+      existingClaim: "harbor-trivy"
+      size: 5Gi
+
+# 默认用户名 admin 的密码配置，注意：密码中一定要包含大小写字母与数字
 harborAdminPassword: "Harbor123456"
 
+# 设置日志级别
 logLevel: info
 
+#各个组件 CPU & Memory 资源相关配置
+nginx:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 500m
+portal:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 500m  
+core:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 1000m
+jobservice:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 500m
+registry:
+  registry:
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 500m
+  controller:
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 500m
+clair:
+  clair:
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 500m
+  adapter:
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 500m
+notary:
+  server:
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 500m
+  signer:
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 500m
+database:
+  internal:
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 500m
+redis:
+  internal:
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 500m
+trivy:
+  enabled: true
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+
+#开启 chartmuseum，使 Harbor 能够存储 Helm 的 chart
 chartmuseum:
   enabled: true
+  resources:
+    requests:
+     memory: 256Mi
+     cpu: 500m   
+
+# 如果使用外部存储和Redis放开此部分     
+#database:
+#  type: external
+#  external:
+#    host: "postgres"
+#    port: "5432"
+#    username: "harbor"
+#    password: "harbor"
+#redis:
+#  type: external
+#  external:
+#    addr: "redis:6379"
+#    password: "passwd"
+  
