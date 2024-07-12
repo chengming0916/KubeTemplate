@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: harbor-registry
+  namespace: harbor
+  labels:
+    app: harbor
+data:
+  config.yml: |-
+  proxy:
+    remoteurl: https://registry-1.docker.io
