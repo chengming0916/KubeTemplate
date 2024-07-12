@@ -28,12 +28,12 @@ spec:
           protocol: TCP
         volumeMounts:
         - mountPath: /data
-          name: storage-volume
+          name: drone-persistent-storage
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       serviceAccount: drone
       serviceAccountName: drone
       volumes:
-      - name: storage-volume
+      - name: drone-persistent-storage
         persistentVolumeClaim:
           claimName: drone
