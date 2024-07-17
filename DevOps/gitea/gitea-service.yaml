@@ -9,12 +9,11 @@ spec:
   ports:
   - name: ssh
     port: 22
-    nodePort: 2022 
     protocol: TCP
     targetPort: 22
   selector:
     app: gitea
-  type: NodePort
+  type: ClusterIP
 
 ---
 
@@ -29,9 +28,28 @@ spec:
   ports:
   - name: http
     port: 3000
-    nodePort: 3000
     protocol: TCP
     targetPort: 3000
   selector:
     app: gitea
-  type: NodePort
+  type: ClusterIP
+
+---
+
+apiVersion: traefik.containo.us/vlalpha1
+kind: IngressRoute
+metadata:
+  name: gitea-websecure
+  namespace: devops
+  labels:
+    app: gitea
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`gitea.example.io`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: gitea-http
+      port: 3000
+  
