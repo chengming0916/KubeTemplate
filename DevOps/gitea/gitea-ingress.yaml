@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gitea-ingress-websecure
+  namespace: devops
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`gitea.example.io`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: gitea-http
+          port: 3000
+  tls:
+    secretName: gitea-tls

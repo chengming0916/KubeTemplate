@@ -33,23 +33,4 @@ spec:
   selector:
     app: gitea
   type: ClusterIP
-
----
-
-apiVersion: traefik.containo.us/vlalpha1
-kind: IngressRoute
-metadata:
-  name: gitea-websecure
-  namespace: devops
-  labels:
-    app: gitea
-spec:
-  entryPoints:
-  - websecure
-  routes:
-  - match: Host(`gitea.example.io`) && PathPrefix(`/`)
-    kind: Rule
-    services:
-    - name: gitea-http
-      port: 3000
   
