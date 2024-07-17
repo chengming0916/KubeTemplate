@@ -19,6 +19,12 @@ spec:
       - name: gitea
         image: gitea/gitea:1.22.0-rootless
         env:
+        - name: ENABLE_OPENID_SIGNIN # 禁用OPENID登录
+          value: "false"
+        - name: DISABLE_REGISTRATION # 禁用注册
+          value: "true"
+        - name: ENABLE_OPENID_SIGNUP # 禁用OPENID注册 ENABLE_OPENID_SIGNUP: ! DISABLE_REGISTRATION
+          value: "false"
         - name: SSH_LISTEN_PORT
           value: "2222"
         - name: SSH_PORT
