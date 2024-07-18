@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: drone
+  name: drone-server-pvc
   namespace: devops
   labels:
-    app: drone
+    app: drone-server
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
+  storageClassName: local-path
   resources:
     requests:
-      storage: 8Gi
-  storageClassName: local-path
+      storage: 10Gi

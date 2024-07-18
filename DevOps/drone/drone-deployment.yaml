@@ -1,39 +1,78 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: drone
-  namespace: devops
   labels:
-    app: drone
+    app: drone-server
+  name: drone-server
+  namespace: devops
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: drone
+      app: drone-server
   template:
     metadata:
       labels:
-        app: drone
+        app: drone-server
     spec:
       containers:
-      - envFrom:
-        - configMapRef:
-            name: drone
-        image: docker.io/drone/drone:2.12.1
+      - env:
+        - name: DRONE_SERVER_HOST
+          value: drone.example.io
+        - name: DRONE_SERVER_PORT
+          value: ":80"
+        - name: DRONE_SERVER_PROTO
+          value: http
+        - name: DRONE_GITEA_SERVER
+          value: https://gitea.example.io
+        - name: DRONE_GITEA_CLIENT_ID
+          value: ""
+        - name: DRONE_GITEA_CLIENT_SECRET
+          value: ""
+        - name: DRONE_RPC_SECRET
+          value: ""
+        image: drone/drone:latest
         imagePullPolicy: IfNotPresent
-        name: server
+        name: drone-server
         ports:
-        - containerPort: 80
-          name: http
+        - name: http
+          containerPort: 80
           protocol: TCP
-        volumeMounts:
-        - mountPath: /data
-          name: drone-persistent-storage
+        #volumeMounts:
+        #- name: drone-persistent-storage
+        #  mountPath: /data
+        #envFrom:
+        #- configMapRef:
+        #    name: drone-server-config
+#      volumes:
+#      - name: drone-persistent-storage
+#        persistentVolumeClaim:
+#          claimName: drone-server-pvc
       dnsPolicy: ClusterFirst
       restartPolicy: Always
-      serviceAccount: drone
-      serviceAccountName: drone
-      volumes:
-      - name: drone-persistent-storage
-        persistentVolumeClaim:
-          claimName: drone
+
+#---
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: drone-runner
+#  namespace: drone
+#  labels:
+#    app: drone-runner
+#spec:
+#  selector:
+#    matchLabels:
+#      app: drone-runner
+#  replicas: 1
+#  template:
+#    metadata:
+#      labels:
+#        app: drone-runner
+#    spec:
+#      containers:
+#      - name: drone-runner
+#        image: docker.io/drone/drone-runner-kube:latest
+#        imagePullPolicy: IfNotPresent
+#        envFrom:
+#        - configMapRef:
+#            name: drone-runner-config
