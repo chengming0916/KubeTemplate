@@ -8,11 +8,12 @@ metadata:
 spec:
   ports:
   - port: 80
+    nodePort: 8080
     protocol: TCP
     targetPort: 80
   selector:
     app: drone-server
-  type: ClusterIP
+  type: NodePort
   
 ---
 
@@ -25,7 +26,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`drone.example.io`) && PathPrefix(`/`)
+    - match: Host(`drone.tjpengan.io`) && PathPrefix(`/`)
       kind: Rule
       services:
         - name: drone-server
