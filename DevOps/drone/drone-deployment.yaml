@@ -15,15 +15,6 @@ spec:
       labels:
         app: drone-server
     spec:
-      ###
-      # 映射域名，防止访问报错，适用于内网部署
-      hostAliases: 
-      - ip: 192.168.0.2
-        hostnames:
-        - drone.example.io
-        - gitea.example.io
-        - runner.example.io
-      ###
       containers:
       - image: drone/drone:latest
         imagePullPolicy: IfNotPresent
@@ -54,7 +45,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: drone-runner
-  namespace: drone
+  namespace: devops
   labels:
     app: drone-runner
 spec:

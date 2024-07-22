@@ -48,7 +48,7 @@ spec:
 #  entryPoints:
 #    - websecure
 #  routes:
-#    - match: Host(`gitea.tjpengan.io`) && PathPrefix(`/`)
+#    - match: Host(`gitea.example.io`) && PathPrefix(`/`)
 #      kind: Rule
 #      services:
 #        - name: gitea-http
