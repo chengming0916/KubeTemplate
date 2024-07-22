@@ -1,16 +1,58 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: v1
+kind: Service
 metadata:
-  name: gitea-ingress-websecure
+  name: gitea-ssh
   namespace: devops
+  labels:
+    app: gitea
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - match: Host(`gitea.example.io`) && PathPrefix(`/`)
-      kind: Rule
-      services:
-        - name: gitea-http
-          port: 3000
-  tls:
-    secretName: gitea-tls
+  ports:
+  - name: ssh
+    port: 22
+    protocol: TCP
+    targetPort: 22
+  selector:
+    app: gitea
+  type: ClusterIP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitea-http
+  namespace: devops
+  labels:
+    app: gitea
+spec:
+  ports:
+  - name: http
+    port: 3000
+    nodePort: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: gitea
+  type: NodePort
+  
+#---
+#
+#apiVersion: traefik.containo.us/v1alpha1
+#kind: IngressRoute
+#metadata:
+#  name: gitea-ingress-websecure
+#  namespace: devops
+#  annotations:
+#    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+#spec:
+#  entryPoints:
+#    - websecure
+#  routes:
+#    - match: Host(`gitea.tjpengan.io`) && PathPrefix(`/`)
+#      kind: Rule
+#      services:
+#        - name: gitea-http
+#          passHostHeader: true
+#          port: 3000
+#  tls:
+#    secretName: gitea-tls

@@ -18,52 +18,10 @@ spec:
       containers:
       - name: gitea
         image: gitea/gitea:1.22.0-rootless
-        env:
-        - name: ENABLE_OPENID_SIGNIN # 禁用OPENID登录
-          value: "false"
-        - name: DISABLE_REGISTRATION # 禁用注册
-          value: "true"
-        - name: ENABLE_OPENID_SIGNUP # 禁用OPENID注册 ENABLE_OPENID_SIGNUP: ! DISABLE_REGISTRATION
-          value: "false"
-        - name: SSH_LISTEN_PORT
-          value: "2222"
-        - name: SSH_PORT
-          value: "22"
-        - name: GITEA_APP_INI
-          value: /data/gitea/conf/app.ini
-        - name: GITEA_CUSTOM
-          value: /data/gitea
-        - name: GITEA_WORK_DIR
-          value: /data
-        - name: GITEA_TEMP
-          value: /tmp/gitea
-        - name: TMPDIR
-          value: /tmp/gitea
-        - name: HOME
-          value: /data/gitea/git
-        # Gitea服务器的对外 URL,决定git clone 的根地址  
-        #- name: ROOT_URL
-        #  value: ""
-        # 服务器域名
-        #- name: DOMAIN
-        #  value: ""
-        - name: APP_NAME
-          value: "Gitea: Git with a cup of tea"
-        - name: RUN_MODE
-          value: prod
-        - name: DB_TYPE
-          value: postgres
-        - name: DB_HOST
-          value: postgres:5432
-        - name: DB_NAME
-          value: gitea
-        - name: DB_USER
-          value: gitea
-        - name: DB_PASSWD
-          value: gitea
-
+        envFrom:
+        - configMapRef:
+            name: gitea-config
         imagePullPolicy: IfNotPresent
-
         ports:
         - containerPort: 22
           name: ssh
@@ -78,21 +36,10 @@ spec:
           name: temp
         - mountPath: /data
           name: gitea-persistent-storage
-        #- mountPath: /data/gitea/conf/
-        #  name: gitea-config
       restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext:
-        fsGroup: 1000
-      terminationGracePeriodSeconds: 60
       volumes:
       - name: temp
         emptyDir: {}
       - name: gitea-persistent-storage
         persistentVolumeClaim:
           claimName: gitea-pvc
-      #- name: gitea-config
-      #  configMap:
-      #    name: gitea-config
-
-
