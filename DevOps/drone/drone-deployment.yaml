@@ -4,7 +4,7 @@ metadata:
   labels:
     app: drone-server
   name: drone-server
-  namespace: devops
+  namespace: drone
 spec:
   replicas: 1
   selector:
@@ -45,7 +45,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: drone-runner
-  namespace: devops
+  namespace: drone
   labels:
     app: drone-runner
 spec:

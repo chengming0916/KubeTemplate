@@ -4,13 +4,13 @@ metadata:
   labels:
     app: drone-server
   name: drone-server
-  namespace: devops
+  namespace: drone
 spec:
   ports:
-  - port: 80
-    nodePort: 8080
+  - name: http
+    port: 80
     protocol: TCP
     targetPort: 80
   selector:
     app: drone-server
-  type: NodePort
+  type: ClusterIP
