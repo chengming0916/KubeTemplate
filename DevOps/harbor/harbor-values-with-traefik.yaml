@@ -7,8 +7,8 @@ expose:
     # 指定使用 sectet 挂载证书模式，且使用上面创建的 secret 资源
     certSource: secret
     secret:
-      secretName: "harbor-tls"
-      notarySecretName: "harbor-tls"
+      secretName: "harbor-secret"
+      notarySecretName: "harbor-secret"
   ingress:
     hosts:
       # 配置 Harbor 的访问域名，需要注意的是配置 notary 域名要和 core 处第一个单词外，其余保持一致
