@@ -25,7 +25,7 @@ metadata:
     app: selfsigned-ca
 spec:
   isCA: true
-  commonName: TianJin Pengan SelfSigned CA
+  commonName: Example SelfSigned CA
   secretName: selfsigned-ca
   privateKey:
     algorithm: ECDSA
