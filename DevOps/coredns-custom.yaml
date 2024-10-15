@@ -42,12 +42,16 @@ data:
   devops.server: |
     example.io {
         errors
+        health
+        ready
         cache 30
         hosts {
+            127.0.0.1 whoami.example.io 
             127.0.0.1 harbor.example.io 
             127.0.0.1 traefik.example.io # traefik dashboard 
             127.0.0.1 gitea.example.io
             127.0.0.1 drone.example.io
-            
+            127.0.0.1 sonar.tjpengan.io
+            fallthrough
         }
     }
