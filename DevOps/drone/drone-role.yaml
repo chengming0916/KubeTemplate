@@ -1,0 +1,35 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: kube-runner-role
+  namespace: drone
+  labels:
+    app: drone-runner
+rules:
+- apiGroups: [""] # "" ฑ๊ร๗ core API ื้
+  resources: ["secrets"]
+  verbs: ["create","delete"]
+- apiGroups: [""]
+  resources: ["pods","pods/log"]
+  verbs: ["get", "create", "delete", "list", "watch", "update"]
+  
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kube-runner
+  namespace: drone
+  labels:
+    app: drone-runner
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: devops
+roleRef:
+  kind: Role
+  name: kube-runner-role
+  apiGroup: rbac.authorization.k8s.io
+#  kind: ClusterRole
+#  name: cluster-admin
+#  apiGroup: rbac.authorization.k8s.io
