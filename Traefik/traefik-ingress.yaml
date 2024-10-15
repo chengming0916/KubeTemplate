@@ -7,7 +7,7 @@
 #     - web
 #   routes:
 #     - kind: Rule
-#       match: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+#       match: PathPrefix(`traefik.example.io`) || PathPrefix(`/api`)
 #       services:
 #         - name: api@internal
 #           kind: TraefikService
@@ -28,5 +28,4 @@ spec:
         - name: api@internal
           kind: TraefikService
   tls:
-    secretName: traefik-dashboard-secret
-        
+    secretName: traefik-dashbord-secret

@@ -20,13 +20,13 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: selfsigned-ca
+  name: selfsigned-root-cert
   labels:
-    app: selfsigned-ca
+    app: selfsigned-root-cert
 spec:
   isCA: true
-  commonName: Example SelfSigned CA
-  secretName: selfsigned-ca
+  commonName: Example SelfSigned Root CA
+  secretName: root-ca
   privateKey:
     algorithm: ECDSA
     size: 256

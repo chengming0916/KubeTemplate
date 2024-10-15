@@ -11,10 +11,24 @@
 #   dnsNames:
 #     - traefik.example.io
 # ---
+
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: traefik-dashboard-issuer
+  namespace: kube-system
+  labels:
+    app: traefik-dashboard-issuer
+spec:
+  ca:
+    secretName: root-ca
+
+---
+
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: traefik-secret
+  name: traefik-cert
   namespace: kube-system
 spec:
   secretName: traefik-dashbord-secret

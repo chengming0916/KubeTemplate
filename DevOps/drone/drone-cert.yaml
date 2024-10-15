@@ -14,7 +14,7 @@ metadata:
     app: drone-issuer
 spec:
   ca:
-    secretName: selfsigned-ca
+    secretName: root-ca
 
 ---
 
