@@ -46,12 +46,13 @@ data:
         ready
         cache 30
         hosts {
+            # 注意此处127.0.0.1需修改未宿主机IP
             127.0.0.1 whoami.example.io 
             127.0.0.1 harbor.example.io 
             127.0.0.1 traefik.example.io # traefik dashboard 
             127.0.0.1 gitea.example.io
             127.0.0.1 drone.example.io
-            127.0.0.1 sonar.tjpengan.io
+            127.0.0.1 sonar.example.io
             fallthrough
         }
         prometheus :9153
