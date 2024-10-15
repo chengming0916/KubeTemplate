@@ -2,13 +2,13 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitea-config
-  namespace: devops
+  namespace: gitea
   labels:
     app: gitea
 data:
-  ENABLE_OPENID_SIGNIN: "false" # ½ûÓÃOPENIDµÇÂ¼
-  DISABLE_REGISTRATION: "true" # ½ûÓÃ×¢²á
-  ENABLE_OPENID_SIGNUP: "false" # ½ûÓÃOPENID×¢²á ENABLE_OPENID_SIGNUP: ! DISABLE_REGISTRATION
+  ENABLE_OPENID_SIGNIN: "false" # ç¦ç”¨OPENIDç™»å½•
+  DISABLE_REGISTRATION: "true" # ç¦ç”¨æ³¨å†Œ
+  ENABLE_OPENID_SIGNUP: "false" # ç¦ç”¨OPENIDæ³¨å†Œ ENABLE_OPENID_SIGNUP: ! DISABLE_REGISTRATION
   SSH_LISTEN_PORT: "2222"
   SSH_PORT: "22"
   GITEA_APP_INI: /data/gitea/conf/app.ini
@@ -17,14 +17,17 @@ data:
   GITEA_TEMP: /tmp/gitea
   TMPDIR: /tmp/gitea
   HOME: /data/gitea/git
-  # Gitea·şÎñÆ÷µÄ¶ÔÍâ URL,¾ö¶¨git clone µÄ¸ùµØÖ·  
+  # GiteaæœåŠ¡å™¨çš„å¯¹å¤– URL,å†³å®šgit clone çš„æ ¹åœ°å€  
   # ROOT_URL: ""
-  # ·şÎñÆ÷ÓòÃû
+  # æœåŠ¡å™¨åŸŸå
   # DOMAIN: ""
-  APP_NAME: "Gitea: Git with a cup of tea" # ±êÌâÀ¸ÏÔÊ¾Ãû³Æ
+  APP_NAME: "Gitea: Git with a cup of tea" # æ ‡é¢˜æ æ˜¾ç¤ºåç§°
+  HTTP_PORT: 3000
   RUN_MODE: prod
   DB_TYPE: postgres
-  DB_HOST: postgres:5432
+  DB_HOST: postgres/postgres:5432
   DB_NAME: gitea
   DB_USER: gitea
   DB_PASSWD: gitea
+  REQUIRE_SIGNIN_VIEW: "true" # ä»…å…è®¸å·²ç™»å½•ç”¨æˆ·æŸ¥çœ‹æ¢ç´¢é¡µé¢ 
+  ACTIONS_ENABLED: "false"
