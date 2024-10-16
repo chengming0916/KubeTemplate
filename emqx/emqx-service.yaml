@@ -6,13 +6,9 @@ metadata:
   labels:
     app: emqx
 spec:
-  selector:
-    app: emqx
-  type: NodePort
   ports:
     - name: mqtt
       port: 1883
-      nodePort: 1883
       protocol: TCP
       targetPort: mqtt
     #- name: mqttssl
@@ -37,6 +33,8 @@ spec:
     #  targetPort: wss
     - name: dashboard
       port: 18083
-      nodePort: 18083
       protocol: TCP
       targetPort: dashboard
+  selector:
+    app: emqx
+  type: ClusterIP
