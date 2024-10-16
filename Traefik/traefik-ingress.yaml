@@ -7,7 +7,7 @@
 #     - web
 #   routes:
 #     - kind: Rule
-#       match: PathPrefix(`traefik.example.io`) || PathPrefix(`/api`)
+#       match: Host(`traefik.example.io`) && (PathPrefix(`/`) || PathPrefix(`/api`))
 #       services:
 #         - name: api@internal
 #           kind: TraefikService
@@ -23,7 +23,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: PathPrefix(`traefik.example.io`) || PathPrefix(`/api`)
+      match: Host(`traefik.example.io`) && (PathPrefix(`/`) || PathPrefix(`/api`))
       services:
         - name: api@internal
           kind: TraefikService
