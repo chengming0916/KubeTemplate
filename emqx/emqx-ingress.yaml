@@ -27,7 +27,7 @@ spec:
     - kind: Rule
       match: Host(`emqx.example.io`) && (PathPrefix(`/`) || PathPrefix(`/api`))
       services:
-        - name: api@internal
-          kind: TraefikService
+        - name: dashboard
+          port: 18083
   tls:
-    secretName: traefik-dashbord-secret
+    secretName: emqx-dashbord-secret
