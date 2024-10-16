@@ -10,7 +10,7 @@ spec:
     - name: mqtt
       port: 1883
       protocol: TCP
-      targetPort: mqtt
+      targetPort: 1883
     #- name: mqttssl
     #  port: 8883
     #  protocol: TCP
@@ -34,7 +34,7 @@ spec:
     - name: dashboard
       port: 18083
       protocol: TCP
-      targetPort: dashboard
+      targetPort: 18083
   selector:
     app: emqx
   type: ClusterIP

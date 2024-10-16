@@ -25,9 +25,9 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`emqx.example.io`) && (PathPrefix(`/`) || PathPrefix(`/api`))
+      match: Host(`emqx.example.io`) && (PathPrefix(`/`))
       services:
-        - name: dashboard
+        - name: emqx-dashboard
           port: 18083
   tls:
     secretName: emqx-dashbord-secret
