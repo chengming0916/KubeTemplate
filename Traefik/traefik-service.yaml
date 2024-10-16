@@ -16,6 +16,11 @@ spec:
     port: 443
     protocol: TCP
     targetPort: websecure
+  - name: redis
+    nodePort: 6379
+    port: 6379
+    protocol: TCP
+    targetPort: redis
   selector:
     app.kubernetes.io/instance: traefik-kube-system
     app.kubernetes.io/name: traefik
