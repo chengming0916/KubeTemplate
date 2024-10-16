@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: redis-config
   namespace: redis
+  labels:
+    app: redis
 data:
   redis.conf: |
     daemonize no
