@@ -3,6 +3,8 @@ kind: IngressRouteTCP
 metadata:
   name: postgres-tcp
   namespace: postgres
+  labels:
+    app: postgres
 spec:
   entryPoints:
   - postgres
