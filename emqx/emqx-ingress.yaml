@@ -4,15 +4,15 @@ metadata:
   name: emqx-tcp
   namespace: emqx
   labels:
-    app: redis
+    app: emqx
 spec:
   entryPoints:
   - mqtt
   routes:
   - match: HostSNI(`*`)
     services:
-    - name: redis
-      port: 6379
+    - name: emqx
+      port: 1883
 
 ---
 
