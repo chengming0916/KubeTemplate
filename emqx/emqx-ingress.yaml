@@ -22,15 +22,15 @@ metadata:
  annotations:
    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
 spec:
- entryPoints:
-   - websecure
- routes:
-   - match: Host(`emqx.example.io`) && PathPrefix(`/`)
-     kind: Rule
-     services:
-       - name: dashboard
-         namespace: emqx
-         passHostHeader: true
-         port: 18083
- tls:
-   secretName: emqx-dashboard-secret
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`emqx.example.io`) || PathPrefix(`/emqx`)
+      services:
+        - name: dashboard
+          port: 80
+          namespace: emqx
+          kind: Service
+  tls:
+    secretName: whoami-secret
