@@ -46,6 +46,13 @@ spec:
           env:
             - name: TZ
               value: "Asia/Shanghai"
+      ports:
+        - containerPort: 554
+          name: rtsp
+          protocol: TCP
+        # - containerPort: 3000
+        #   name: http
+        #   protocol: TCP
       # volumes:
       #   - name: timezone
       #     hostPath:
