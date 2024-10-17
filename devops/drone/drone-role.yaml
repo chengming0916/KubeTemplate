@@ -6,7 +6,7 @@ metadata:
   labels:
     app: drone-runner
 rules:
-- apiGroups: [""] # "" ±êÃ÷ core API ×é
+- apiGroups: [""] # "" æ ‡æ˜Ž core API ç»„
   resources: ["secrets"]
   verbs: ["create","delete"]
 - apiGroups: [""]

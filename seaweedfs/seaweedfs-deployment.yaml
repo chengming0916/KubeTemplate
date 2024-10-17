@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: seaweed
+  namespace: seaweed
   labels:
     app: seaweed
 spec:
