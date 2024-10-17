@@ -1,0 +1,35 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami-web
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`whoami.example.io`) || PathPrefix(`/whoami`)
+      services:
+        - name: whoami
+          namespace: default
+          kind: Service
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami-websecure
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`traefik.example.io`) || PathPrefix(`/whoami`)
+      services:
+        - name: whoami
+          namespace: default
+          kind: Service
+  tls:
+    secretName: traefik-dashbord-secret
