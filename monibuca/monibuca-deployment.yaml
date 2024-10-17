@@ -39,7 +39,7 @@ spec:
           volumeMounts:
             - name: monibuca-config
               mountPath: /monibuca
-              subPath: config.yaml
+              # subPath: config.yaml
           env:
             - name: TZ
               value: "Asia/Shanghai"
