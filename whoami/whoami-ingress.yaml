@@ -11,6 +11,7 @@ spec:
       match: Host(`whoami.example.io`) || PathPrefix(`/whoami`)
       services:
         - name: whoami
+          port: 80
           namespace: default
           kind: Service
 
@@ -29,6 +30,7 @@ spec:
       match: Host(`traefik.example.io`) || PathPrefix(`/whoami`)
       services:
         - name: whoami
+          port: 80
           namespace: default
           kind: Service
   tls:
