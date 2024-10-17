@@ -9,8 +9,9 @@ spec:
   ports:
     - name: rtsp
       port: 554
+      nodePort: 554
       targetPort: 554
       protocol: TCP
   selector:
     app: monibuca
-  type: ClusterIP
+  type: NodePort
