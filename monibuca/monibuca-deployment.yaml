@@ -15,31 +15,13 @@ spec:
       labels:
         app: monibuca
     spec:
-      # initContainers:
-      #   - name: init-0
-      #     image: busybox
-      #     imagePullPolicy: IfNotPresent
-      #     terminationMessagePath: /dev/termination-log
-      #     terminationMessagePolicy: File
-      #     command: [ "sysctl", "-w", "net.core.somaxconn=511" ]
-      #     securityContext:
-      #       privileged: true
-      #   - name: init-1
-      #     image: busybox
-      #     imagePullPolicy: IfNotPresent
-      #     terminationMessagePath: /dev/termination-log
-      #     terminationMessagePolicy: File
-      #     command: [ "sh", "-c", "echo never > /sys/kernel/mm/transparent_hugepage/enabled" ]
-      #     securityContext:
-      #       privileged: true
       containers:
         - name: monibuca
           image: langhuihui/monibuca:latest
           imagePullPolicy: IfNotPresent
           volumeMounts:
-            # - name: monibuca-config
-            #   mountPath: /monibuca
-              # subPath: config.yaml
+            - name: monibuca-config
+              mountPath: /monibuca
           env:
             - name: TZ
               value: "Asia/Shanghai"
@@ -54,6 +36,6 @@ spec:
         - name: timezone
           hostPath:
             path: /usr/share/zoneinfo/Asia/Shanghai
-        # - name: monibuca-config
-        #   configMap:
-        #     name: monibuca-config
+        - name: monibuca-config
+          configMap:
+            name: monibuca-config
