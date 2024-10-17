@@ -37,8 +37,8 @@ spec:
           image: langhuihui/monibuca:latest
           imagePullPolicy: IfNotPresent
           volumeMounts:
-            - name: monibuca-config
-              mountPath: /monibuca
+            # - name: monibuca-config
+            #   mountPath: /monibuca
               # subPath: config.yaml
           env:
             - name: TZ
@@ -54,6 +54,6 @@ spec:
         - name: timezone
           hostPath:
             path: /usr/share/zoneinfo/Asia/Shanghai
-        - name: monibuca-config
-          configMap:
-            name: monibuca-config
+        # - name: monibuca-config
+        #   configMap:
+        #     name: monibuca-config
