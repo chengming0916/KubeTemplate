@@ -32,4 +32,4 @@ spec:
           namespace: default
           kind: Service
   tls:
-    secretName: traefik-dashbord-secret
+    secretName: whoami-secret
