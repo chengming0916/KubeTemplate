@@ -33,9 +33,6 @@ spec:
               name: http
               protocol: TCP
       volumes:
-        - name: timezone
-          hostPath:
-            path: /usr/share/zoneinfo/Asia/Shanghai
         - name: monibuca-config
           configMap:
             name: monibuca-config
