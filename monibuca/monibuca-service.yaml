@@ -12,6 +12,11 @@ spec:
       nodePort: 554
       targetPort: 554
       protocol: TCP
+    - name: http
+      port: 8080
+      nodePort: 8080
+      targetPort: 8080
+      protocol: TCP
   selector:
     app: monibuca
   type: NodePort

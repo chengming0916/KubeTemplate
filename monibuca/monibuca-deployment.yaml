@@ -36,13 +36,12 @@ spec:
         - name: monibuca
           image: langhuihui/monibuca:latest
           imagePullPolicy: IfNotPresent
-          # volumeMounts:
+          volumeMounts:
           #   - name: redis-persistent-storage
           #     mountPath: /var/lib/redis
-          #   - name: redis-config
-          #     mountPath: /usr/local/etc/redis/redis.conf
-          #     subPath: redis.conf
-          # command: [ "redis-server" ,"/usr/local/etc/redis/redis.conf" ]
+            - name: monibuca-config
+              mountPath: /monibuca
+              subPath: config.yaml
           env:
             - name: TZ
               value: "Asia/Shanghai"
@@ -50,16 +49,16 @@ spec:
         - containerPort: 554
           name: rtsp
           protocol: TCP
-        # - containerPort: 3000
-        #   name: http
-        #   protocol: TCP
-      # volumes:
-      #   - name: timezone
-      #     hostPath:
-      #       path: /usr/share/zoneinfo/Asia/Shanghai
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+      volumes:
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
       #   - name: redis-persistent-storage
       #     persistentVolumeClaim:
       #       claimName: redis-pvc
-      #   - name: redis-config
-      #     configMap:
-      #       name: redis-config
+        - name: monibuca-config
+          configMap:
+            name: monibuca-config
