@@ -37,28 +37,23 @@ spec:
           image: langhuihui/monibuca:latest
           imagePullPolicy: IfNotPresent
           volumeMounts:
-          #   - name: redis-persistent-storage
-          #     mountPath: /var/lib/redis
             - name: monibuca-config
               mountPath: /monibuca
               subPath: config.yaml
           env:
             - name: TZ
               value: "Asia/Shanghai"
-      ports:
-        - containerPort: 554
-          name: rtsp
-          protocol: TCP
-        - containerPort: 8080
-          name: http
-          protocol: TCP
+          ports:
+            - containerPort: 554
+              name: rtsp
+              protocol: TCP
+            - containerPort: 8080
+              name: http
+              protocol: TCP
       volumes:
         - name: timezone
           hostPath:
             path: /usr/share/zoneinfo/Asia/Shanghai
-      #   - name: redis-persistent-storage
-      #     persistentVolumeClaim:
-      #       claimName: redis-pvc
         - name: monibuca-config
           configMap:
             name: monibuca-config
