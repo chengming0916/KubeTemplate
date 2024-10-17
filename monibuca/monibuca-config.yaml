@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: monibuca-config
+  namespace: monibuca
+  labels:
+    app: monibuca
+data:
+  config.yaml: |-
+
