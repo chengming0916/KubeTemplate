@@ -3,8 +3,6 @@ kind: IngressRouteTCP
 metadata:
   name: emqx-tcp
   namespace: emqx
-  labels:
-    app: emqx
 spec:
   entryPoints:
   - mqtt
@@ -19,15 +17,20 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: emqx-dashboard-websecure
+ name: emqx-dashoard-websecure
+ namespace: emqx
+ annotations:
+   traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`emqx.example.io`) && (PathPrefix(`/`))
-      services:
-        - name: emqx-dashboard
-          port: 18083
-  tls:
-    secretName: emqx-dashbord-secret
+ entryPoints:
+   - websecure
+ routes:
+   - match: Host(`emqx.example.io`) && PathPrefix(`/`)
+     kind: Rule
+     services:
+       - name: dashboard
+         namespace: emqx
+         passHostHeader: true
+         port: 18083
+ tls:
+   secretName: emqx-dashboard-secret
