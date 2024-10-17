@@ -7,4 +7,6 @@ metadata:
     app: monibuca
 data:
   config.yaml: |-
+    hls:
+      enable: false
 
