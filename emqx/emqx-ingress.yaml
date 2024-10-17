@@ -17,6 +17,27 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
+ name: emqx-dashoard-web
+ namespace: emqx
+ annotations:
+   traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`emqx.example.io`) || PathPrefix(`/emqx`)
+      services:
+        - name: dashboard
+          port: 18083
+          namespace: emqx
+          kind: Service
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
  name: emqx-dashoard-websecure
  namespace: emqx
  annotations:
