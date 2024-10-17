@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: traefik.io/v1alpha1
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: emqx-dashboard-websecure
