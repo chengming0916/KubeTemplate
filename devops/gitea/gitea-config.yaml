@@ -22,7 +22,7 @@ data:
   # 服务器域名
   # DOMAIN: ""
   APP_NAME: "Gitea: Git with a cup of tea" # 标题栏显示名称
-  HTTP_PORT: 3000
+  HTTP_PORT: "3000"
   RUN_MODE: prod
   DB_TYPE: postgres
   DB_HOST: postgres/postgres:5432
