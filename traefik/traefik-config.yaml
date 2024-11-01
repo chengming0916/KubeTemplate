@@ -1,15 +1,16 @@
 apiVersion: helm.cattle.io/v1
-kind: HelmChat
+kind: HelmChartConfig
 metadata:
   name: traefik
   namespace: kube-system
 spec:
   valuesContent: |-
-    dashboard:
-      enabled: true
     ports:
       traefik:
+        port: 8080
         expose: true
+        exposedPort: 8080
+        protocol: TCP
       redis:
         port: 6379
         expose: true
