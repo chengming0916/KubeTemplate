@@ -6,20 +6,30 @@ metadata:
 spec:
   valuesContent: |-
     ports:
+      web:
+        expose:
+          default: false
+      websecure:
+        expose:
+          default: true
+        nodePort: 443
       traefik:
         port: 8080
-        expose: true
-        exposedPort: 8080
+        expose:
+          default: true
+        nodePort: 8080
         protocol: TCP
       redis:
         port: 6379
-        expose: true
-        exposedPort: 6379
+        expose:
+          default: true
+        nodePort: 6379
         protocol: TCP
       postgres:
         port: 5432
-        expose: true
-        exposedPort: 5432
+        expose:
+          default: true
+        nodePort: 5432
         protocol: TCP
     logs:
       access:
