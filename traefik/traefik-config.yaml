@@ -7,13 +7,17 @@ spec:
   valuesContent: |-
     ports:
       web:
+        port: 80 
         expose:
           default: false
       websecure:
+        port: 443
         expose:
           default: true
         nodePort: 443
+        protocol: TCP
       traefik:
+        port: 9000
         expose:
           default: true
         nodePort: 9000
@@ -22,20 +26,32 @@ spec:
         port: 1883
         expose:
           default: true
+          #default: false
+          #internal: true
         nodePort: 1883
         protocol: TCP
       redis:
         port: 6379
         expose:
           default: true
+          #default: false
+          #internal: true
         nodePort: 6379
         protocol: TCP
       postgres:
         port: 5432
         expose:
           default: true
+          #default: false
+          #internal: true
         nodePort: 5432
         protocol: TCP
+    #service:
+    #  additionalServices:
+    #    internal:
+    #      type: LoadBalancer
+    #      labels:
+    #        traefik-service-label: internal
     logs:
       access:
         enabled: true
