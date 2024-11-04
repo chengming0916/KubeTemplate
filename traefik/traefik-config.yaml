@@ -14,10 +14,9 @@ spec:
           default: true
         nodePort: 443
       traefik:
-        port: 8080
         expose:
           default: true
-        nodePort: 8080
+        nodePort: 9000
         protocol: TCP
       mqtt:
         port: 1883
