@@ -9,9 +9,11 @@ spec:
       web:
         port: 80 
         expose:
-          default: false
-        proxyProtocol:
-          insecure: true
+          default: true
+        nodePort: 80
+        protocol: TCP
+        #proxyProtocol:
+        #  insecure: true
         #redirectTo:
         #  port: websecure
       websecure:
