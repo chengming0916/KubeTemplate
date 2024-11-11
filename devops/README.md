@@ -17,7 +17,7 @@ helm repo add jetstack https://charts.jetstack.io
 
 helm upgrade cert-manager jetstack/cert-manager \
     --namespace cert-manager \
-    --install --create-namespace
+    --install --create-namespace \
     --set crds.enabled=true
 
 # 自签名证书
