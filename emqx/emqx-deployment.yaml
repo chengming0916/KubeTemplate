@@ -32,8 +32,8 @@ spec:
         - name: dashboard
           containerPort: 18083
         volumeMounts:
-          - name: emqx-persistent-storage
-            mountPath: /var/lib/emqx
+          #- name: emqx-persistent-storage
+          #  mountPath: /var/lib/emqx
           - name: emqx-config
             mountPath: /opt/emqx/etc/emqx.conf
             subPath: emqx.conf
@@ -41,6 +41,6 @@ spec:
         - name: emqx-config
           configMap:
             name: emqx-config
-        - name: emqx-persistent-storage
-          persistentVolumeClaim:
-            claimName: emqx-pvc
+        #- name: emqx-persistent-storage
+        #  persistentVolumeClaim:
+        #    claimName: emqx-pvc

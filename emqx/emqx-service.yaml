@@ -14,27 +14,42 @@ spec:
     #- name: mqttssl
     #  port: 8883
     #  protocol: TCP
-    #  nodePort: 8883
     #  targetPort: mqttssl
     #- name: mgmt
     #  port: 8081
-    #  nodePort: 8081
     #  protocol: TCP
     #  targetPort: 8081
     #- name: ws
     #  port: 8083
-    #  nodePort: 8083
     #  protocol: TCP
     #  targetPort: ws
     #- name: wss
     #  port: 8084
-    #  nodePort: 8084
     #  protocol: TCP
     #  targetPort: wss
+  selector:
+    app: emqx
+  type: ClusterIP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: emqx-dashboard
+  namespace: emqx
+  labels:
+    app: emqx
+spec:
+  ports:
     - name: dashboard
       port: 18083
       protocol: TCP
       targetPort: 18083
+    - name: dashboard-secure
+      port: 18084
+      protocol: TCP
+      targetPort: 18084
   selector:
     app: emqx
   type: ClusterIP

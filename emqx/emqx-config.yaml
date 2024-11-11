@@ -10,19 +10,23 @@ data:
     node {
       name = "EMQX"
       cookie = "emqxsecretcookie"
-      data_dir="/var/lib/emqx"
+      data_dir="data"
     }
     cluster {
       name = emqxcl
       discovery_strategy = manual
     }
-
     dashboard {
-        listeners.http {
+      listeners{
+        http: {
           bind = "0.0.0.0:18083"
         }
+    
+        https {
+          bind = "0.0.0.0:18084"
+        }
+      }
     }
-
     authentication = {
         mechanism = password_based
         backend = built_in_database
