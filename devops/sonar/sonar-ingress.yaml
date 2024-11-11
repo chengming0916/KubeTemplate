@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sonar-ingress
+  namespace: sonar
+  annotations:
+    traefik.ingress.kubernetes.io/service.stick.cookie: "true"
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`sonar.example.io`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: sonar
+      port: 80
+      namespace: sonar
+  tls:
+    secretName: sonar-secret

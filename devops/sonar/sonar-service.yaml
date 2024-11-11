@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+meatdata:
+  name: sonar
+  namespace: sonar
+  labels:
+    app: sonar
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: sonar
+  type: ClusterIP
