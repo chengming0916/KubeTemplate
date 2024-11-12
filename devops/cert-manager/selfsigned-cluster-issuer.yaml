@@ -26,7 +26,7 @@ spec:
   secretName: root-ca
   privateKey:
     algorithm: ECDSA
-    size: 2048
+    size: 256
   subject:
     organizations:
       - Example Inc.
