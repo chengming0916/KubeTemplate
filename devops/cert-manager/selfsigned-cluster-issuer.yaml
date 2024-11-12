@@ -1,24 +1,20 @@
-# apiVersion: cert-manager.io/v1
-# kind: Issuer
-# metadata:
-#  name: selfsigned-issuer
-#  namespace: kube-system
-# spec:
-#  selfsigned: {}
-# ---
+# 自签名颁发机构
 apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+kind: Issuer
 metadata:
-  name: selfsigned-cluster-issuer
+  name: selfsigned-issuer
+  namespace: kube-system
   labels:
-    app: selfsigned-cluster-issuer
+    app: selfsigned-issuer
 spec:
   selfSigned: {}
 ---
+# 自签名根证书
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: selfsigned-root-cert
+  namespace: kube-system
   labels:
     app: selfsigned-root-cert
 spec:
@@ -32,7 +28,7 @@ spec:
     organizations:
       - Example Inc.
   issuerRef:
-    name: selfsigned-cluster-issuer
+    name: selfsigned-issuer
     kind: ClusterIssuer
     group: cert-manager.io
   # 该格式不允许d(days)后缀，
@@ -42,3 +38,14 @@ spec:
   dnsNames:
     - "example.io"
     - "*.example.io"
+---
+# 集群内证书颁发机构
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-cluster-issuer
+  labels:
+    app: selfsigned-cluster-issuer
+spec:
+  ca:
+    secretName: selfsigned-root-ca
