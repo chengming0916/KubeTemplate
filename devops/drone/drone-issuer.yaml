@@ -9,7 +9,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata: 
   name: drone-issuer
-  namespece: drone
+  namespace: drone
   labels:
     app: drone-issuer
 spec:
