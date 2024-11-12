@@ -37,7 +37,7 @@ spec:
   # 该格式不允许d(days)后缀，
   # 必须使用s(seconds),m(minutes)和h(hours)代替
   duration: 87600h # 10year 有效期
-  rebewBefore: 360h # 15d 到期前续订
+  renewBefore: 360h # 15d 到期前续订
   dnsNames:
     - "example.io"
     - "*.example.io"
