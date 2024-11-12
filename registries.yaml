@@ -11,3 +11,5 @@ mirrors:
 #    auth:
 #      username: "harbor"
 #      password: "Harbor123456"
+#    tls:
+#      ca_file: /etc/rancher/k3s/ca.cert
