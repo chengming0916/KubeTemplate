@@ -22,10 +22,10 @@ metadata:
   namespace: kube-system
 spec:
   entryPoints:
-    - websecure
+    - traefik
   routes:
     - kind: Rule
-      match: Host(`traefik.example.io`) && (PathPrefix(`/`) || PathPrefix(`/api`))
+      match: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
       services:
         - name: api@internal
           kind: TraefikService
