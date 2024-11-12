@@ -15,6 +15,7 @@ metadata:
 spec:
   ca:
     secretName: root-ca
+    secretNamespace: kube-system
 
 ---
 
