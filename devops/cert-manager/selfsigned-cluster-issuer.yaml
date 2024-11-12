@@ -5,18 +5,14 @@
 #  namespace: kube-system
 # spec:
 #  selfsigned: {}
-
 # ---
-
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: selfsigned-cluster-issuer
 spec:
   selfSigned: {}
-
 ---
-
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -42,6 +38,6 @@ spec:
   # 必须使用s(seconds),m(minutes)和h(hours)代替
   duration: 87600h # 10year 有效期
   rebewBefore: 360h # 15d 到期前续订
-  dnaNames:
+  dnsNames:
     - "example.io"
     - "*.example.io"
