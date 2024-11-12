@@ -10,19 +10,21 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: selfsigned-cluster-issuer
+  labels:
+    app: selfsigned-cluster-issuer
 spec:
   selfSigned: {}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: root-cert
+  name: selfsigned-root-cert
   labels:
-    app: root-cert
+    app: selfsigned-root-cert
 spec:
   isCA: true
   commonName: Example SelfSigned Root CA
-  secretName: root-ca
+  secretName: selfsigned-root-ca
   privateKey:
     algorithm: ECDSA
     size: 256
