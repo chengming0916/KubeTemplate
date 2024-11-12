@@ -16,10 +16,9 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: selfsigned-root-cert
-  namespace: kube-system
+  name: root-cert
   labels:
-    app: selfsigned-root-cert
+    app: root-cert
 spec:
   isCA: true
   commonName: Example SelfSigned Root CA
