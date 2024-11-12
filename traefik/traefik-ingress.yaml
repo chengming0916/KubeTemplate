@@ -1,14 +1,14 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik-dashboard
+  name: traefik-dashboard-websecure
   namespace: kube-system
 spec:
   entryPoints:
-    - traefik
+    - websecure
   routes:
     - kind: Rule
-      match: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+      match: Host(`traefik.example.io`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
       services:
         - name: api@internal
           kind: TraefikService

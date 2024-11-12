@@ -22,12 +22,12 @@ spec:
           default: true
         nodePort: 443
         protocol: TCP
-      traefik:
-        port: 9000
-        expose:
-          default: true
-        nodePort: 9000
-        protocol: TCP
+      # traefik:
+      #   port: 9000
+      #   expose:
+      #     default: true
+      #   nodePort: 9000
+      #   protocol: TCP
       mqtt:
         port: 1883
         expose:
