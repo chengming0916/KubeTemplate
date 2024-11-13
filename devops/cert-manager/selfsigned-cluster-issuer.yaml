@@ -29,7 +29,7 @@ spec:
       - Example Inc.
   issuerRef:
     name: selfsigned-issuer
-    kind: ClusterIssuer
+    kind: Issuer
     group: cert-manager.io
   # 该格式不允许d(days)后缀，
   # 必须使用s(seconds),m(minutes)和h(hours)代替
