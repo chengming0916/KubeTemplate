@@ -58,8 +58,8 @@ spec:
     services:
     - name: harbor-core
       port: 80
-    tls:
-      secretName: harbor-secret
+  tls:
+    secretName: harbor-secret
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -77,8 +77,8 @@ spec:
     services:
     - name: harbor-core
       port: 80
-    tls:
-      secretName: harbor-secret      
+  tls:
+    secretName: harbor-secret
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -96,8 +96,8 @@ spec:
     services:
     - name: harbor-core
       port: 80
-    tls:
-      secretName: harbor-secret   
+  tls:
+    secretName: harbor-secret   
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -115,8 +115,8 @@ spec:
     services:
     - name: harbor-core
       port: 80
-    tls:
-      secretName: harbor-secret   
+  tls:
+    secretName: harbor-secret   
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -134,5 +134,5 @@ spec:
     services:
     - name: harbor-core
       port: 80
-    tls:
-      secretName: harbor-secret   
+  tls:
+    secretName: harbor-secret   
