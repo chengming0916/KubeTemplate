@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+matadata:
+  name: sonar-config
+  namespace: sonar
+  label:
+    app: sonar-config
+data:
+  config.yaml: |
+    # 配置文件占位符
