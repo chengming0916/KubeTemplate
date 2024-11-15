@@ -15,9 +15,9 @@ spec:
   renewBefore: 72h # 3d
   subject:
     organizations:
-      - Example .Inc
+    - Example .Inc
   dnsNames:
-    - whoami.example.io
+  - whoami.example.io
   issuerRef:
     name: selfsigned-cluster-issuer
     kind: ClusterIssuer
@@ -30,14 +30,14 @@ metadata:
   namespace: default
 spec:
   entryPoints:
-    - websecure
+  - websecure
   routes:
-    - kind: Rule
-      match: Host(`whoami.example.io`) || PathPrefix(`/whoami`)
-      services:
-        - name: whoami
-          port: 80
-          namespace: default
-          kind: Service
+  - kind: Rule
+    match: Host(`whoami.example.io`) || PathPrefix(`/whoami`)
+    services:
+    - name: whoami
+      port: 80
+      namespace: default
+      kind: Service
   tls:
     secretName: whoami-secret

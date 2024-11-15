@@ -1,3 +1,28 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitea-cert
+  namespace: gitea
+spec:
+  isCA: false
+  commonName: Example gitea
+  secretName: gitea-secret
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  duration: 2160h # 90d
+  renewBefore: 72h # 3d
+  subject:
+    organizations:
+    - gitea.example.io
+  dnsNames:
+  - gitea.example.io
+  issuerRef:
+    name: selfsigned-cluster-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -7,13 +32,13 @@ metadata:
    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
 spec:
  entryPoints:
-   - websecure
+ - websecure
  routes:
-   - match: Host(`gitea.example.io`) && PathPrefix(`/`)
-     kind: Rule
-     services:
-       - name: gitea-http
-         passHostHeader: true
-         port: 3000
+ - match: Host(`gitea.example.io`) && PathPrefix(`/`)
+   kind: Rule
+   services:
+   - name: gitea-http
+     passHostHeader: true
+     port: 3000
  tls:
    secretName: gitea-secret
