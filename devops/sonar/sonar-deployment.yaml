@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonar-qube
+  namespace: sonar
+  label:
+    app: sonar-qube
+spec:
+  selector:
+    matchLabels:
+      app: sonar-qube
+  template:
+    metadata:
+      labels:
+        app: sonar-qube
+    spec:
+      containers:
+      - image: sonarqube:lts-community
+        name: sonar
+        env:
+        - name: TZ
+          value: Asia/Shanghai
+        - name: SONAR_JDBC_URL
+          value: "jdbc:postgresql://postgresdb:5432/sonar"
+        - name: SONAR_JDBC_USERNAME
+          value: sonar
+        - name: SONAR_JDBC_PASSWORD
+          value: sonar
+        ports:
+        - containerPort: 
+          name: http
+        volumeMounts:
+        - name: sonar-persistent-storage
+          mountPath: /opt/sonarqube
+        - name: sonar-config
+          mountPath: /opt/sonarqube/config
+      volumes:
+      - name: sonar-storage
+        persistentVolumeClaim:
+          claimName: sonar-pvc
+      - name: mysql-config
+        configMap:
+          name: mysql-config
+      
+        
