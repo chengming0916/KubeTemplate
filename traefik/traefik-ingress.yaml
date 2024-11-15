@@ -1,3 +1,28 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-cert
+  namespace: kube-system
+spec:
+  isCA: false
+  commonName: Example traefik dashboard
+  secretName: traefik-dashbord-secret
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  duration: 2160h # 90d
+  renewBefore: 72h # 3d
+  subject:
+    organizations:
+    - Example .Inc
+  dnsNames:
+  - traefik.example.io
+  issuerRef:
+    name: selfsigned-cluster-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:

@@ -1,21 +1,3 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: whoami-web
-  namespace: default
-spec:
-  entryPoints:
-    - web
-  routes:
-    - kind: Rule
-      match: Host(`whoami.example.io`) || PathPrefix(`/whoami`)
-      services:
-        - name: whoami
-          port: 80
-          namespace: default
-          kind: Service
-
----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -23,7 +5,7 @@ metadata:
   namespace: default
 spec:
   isCA: false
-  commonName: Example Self Signed - WHOAMI
+  commonName: Example whoami
   secretName: whoami-secret
   privateKey:
     algorithm: RSA
@@ -40,9 +22,7 @@ spec:
     name: selfsigned-cluster-issuer
     kind: ClusterIssuer
     group: cert-manager.io
-
 ---
-
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
