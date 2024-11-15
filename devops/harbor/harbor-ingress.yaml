@@ -1,89 +1,138 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: cert-manager.io/v1
+kind: Certificate
 metadata:
+  name: harbor-cert
   namespace: harbor
-  name: harbor-http
 spec:
-  entryPoints:
-    - web
-  routes:
-    - match: Host(`harbor.example.com`) && PathPrefix(`/`)
-      kind: Rule
-      services:
-        - name: harbor-portal
-          port: 80
+  isCA: false
+  commonName: Example harbor
+  secretName: harbor-secret
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  duration: 2160h # 90d
+  renewBefore: 72h # 3d
+  subject:
+    organizations:
+    - Example .Inc
+  dnsNames:
+  - harbor.example.io
+  issuerRef:
+    name: selfsigned-cluster-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
+  name: harbor-websecure
   namespace: harbor
+  annotations:
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`harbor.example.com`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: harbor-portal
+      port: 80
+  tls:
+    secretName: harbor-secret
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
   name: harbor-api
+  namespace: harbor
+  annotations:
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
 spec:
   entryPoints:
-    - web
+  - websecure
   routes:
-    - match: Host(`harbor.example.com`) && PathPrefix(`/api`)
-      kind: Rule
-      services:
-        - name: harbor-core
-          port: 80
+  - match: Host(`harbor.example.com`) && PathPrefix(`/api`)
+    kind: Rule
+    services:
+    - name: harbor-core
+      port: 80
+    tls:
+      secretName: harbor-secret
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: harbor
   name: harbor-service
+  namespace: harbor
+  annotations:
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
 spec:
   entryPoints:
-    - web
+  - websecure
   routes:
-    - match: Host(`harbor.example.com`) && PathPrefix(`/service`)
-      kind: Rule
-      services:
-        - name: harbor-core
-          port: 80
+  - match: Host(`harbor.example.com`) && PathPrefix(`/service`)
+    kind: Rule
+    services:
+    - name: harbor-core
+      port: 80
+    tls:
+      secretName: harbor-secret      
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: harbor
   name: harbor-v2
+  namespace: harbor
+  annotations:
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"  
 spec:
   entryPoints:
-    - web
+  - websecure
   routes:
-    - match: Host(`harbor.example.com`) && PathPrefix(`/v2`)
-      kind: Rule
-      services:
-        - name: harbor-core
-          port: 80
+  - match: Host(`harbor.example.com`) && PathPrefix(`/v2`)
+    kind: Rule
+    services:
+    - name: harbor-core
+      port: 80
+    tls:
+      secretName: harbor-secret   
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: harbor
   name: harbor-chartrepo
+  namespace: harbor
+  annotations:
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"    
 spec:
   entryPoints:
-    - web
+  - websecure
   routes:
-    - match: Host(`harbor.example.com`) && PathPrefix(`/chartrepo`)
-      kind: Rule
-      services:
-        - name: harbor-core
-          port: 80
+  - match: Host(`harbor.example.com`) && PathPrefix(`/chartrepo`)
+    kind: Rule
+    services:
+    - name: harbor-core
+      port: 80
+    tls:
+      secretName: harbor-secret   
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  namespace: harbor
   name: harbor-c
+  namespace: harbor
+  annotations:
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"   
 spec:
   entryPoints:
-    - web
+  - websecure
   routes:
-    - match: Host(`harbor.example.com`) && PathPrefix(`/c`)
-      kind: Rule
-      services:
-        - name: harbor-core
-          port: 80
+  - match: Host(`harbor.example.com`) && PathPrefix(`/c`)
+    kind: Rule
+    services:
+    - name: harbor-core
+      port: 80
+    tls:
+      secretName: harbor-secret   

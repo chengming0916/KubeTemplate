@@ -15,7 +15,7 @@ spec:
   renewBefore: 72h # 3d
   subject:
     organizations:
-    - gitea.example.io
+    - Example .Inc
   dnsNames:
   - gitea.example.io
   issuerRef:
@@ -26,19 +26,19 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
- name: gitea-websecure
- namespace: gitea
- annotations:
-   traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+  name: gitea-websecure
+  namespace: gitea
+  annotations:
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
 spec:
- entryPoints:
- - websecure
- routes:
- - match: Host(`gitea.example.io`) && PathPrefix(`/`)
-   kind: Rule
-   services:
-   - name: gitea-http
-     passHostHeader: true
-     port: 3000
- tls:
-   secretName: gitea-secret
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`gitea.example.io`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: gitea-http
+      passHostHeader: true
+      port: 3000
+  tls:
+    secretName: gitea-secret
