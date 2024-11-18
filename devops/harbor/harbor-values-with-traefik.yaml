@@ -150,13 +150,13 @@ chartmuseum:
 database:
   type: external
   external:
-    host: "192.168.50.249"
+    host: "postgres.postgres.svc.cluster.local"
     port: "5432"
     username: "harbor"
     password: "harbor"
 redis:
   type: external
   external:
-    addr: "192.168.50.249:6379"
+    addr: "redis.redis.svc.cluster.local:6379"
     password: "passwd"
   
