@@ -36,24 +36,28 @@ persistence:
   resourcePolicy: "keep"    
   persistentVolumeClaim:
     registry:
-      existingClaim: "harbor-registry"
+      #existingClaim: "harbor-registry" # 使用已有PVC
+      storageClass: "local-path"
+      #accessMode: ReadWriteOnce
       size: 100Gi
     chartmuseum:
-      existingClaim: "harbor-chartmuseum"
+      existingClaim: "harbor-chartmuseum" # 使用已有PVC
       size: 5Gi
     jobservice:
-      existingClaim: "harbor-jobservice"
+      existingClaim: "harbor-jobservice" # 使用已有PVC
       size: 5Gi
     # 如果使用外部数据库可注释此部分
-    database:
-      existingClaim: "harbor-database"
-      size: 5Gi
+    #database:
+    #  existingClaim: "harbor-database"
+    #  size: 5Gi
     # 如果使用外部Redis服务可注释此部分
-    redis:
-      existingClaim: "harbor-redis"
-      size: 5Gi
+    #redis:
+    #  existingClaim: "harbor-redis"
+    #  size: 5Gi
     trivy:
-      existingClaim: "harbor-trivy"
+      #existingClaim: "harbor-trivy" # 使用已有PVC
+      storageClass: "local-path"
+      #accessMode: ReadWriteOnce
       size: 5Gi
 
 # 默认用户名 admin 的密码配置，注意：密码中一定要包含大小写字母与数字
