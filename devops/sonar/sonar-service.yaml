@@ -4,7 +4,7 @@ metadata:
   name: sonar-http
   namespace: sonar
   labels:
-    app: sonar-http
+    app: sonar-qube
 spec:
   ports:
   - name: http
@@ -12,5 +12,5 @@ spec:
     protocol: TCP
     targetPort: 9000
   selector:
-    app: sonar-http
+    app: sonar-qube
   type: ClusterIP
