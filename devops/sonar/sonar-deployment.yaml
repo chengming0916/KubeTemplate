@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: sonar-qube
   namespace: sonar
-  label:
+  labels:
     app: sonar-qube
 spec:
   selector:
