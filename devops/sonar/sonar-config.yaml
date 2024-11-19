@@ -3,7 +3,7 @@ kind: ConfigMap
 matadata:
   name: sonar-config
   namespace: sonar
-  label:
+  labels:
     app: sonar-config
 data:
   config.yaml: |

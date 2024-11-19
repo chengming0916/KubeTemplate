@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: sonar-pvc
   namespace: sonar
-  label:
+  labels:
     app: sonar
 spec:
   accessModes:
