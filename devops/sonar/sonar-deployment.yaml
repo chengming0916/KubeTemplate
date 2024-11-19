@@ -21,7 +21,7 @@ spec:
         - configMapRef:
             name: sonar-config
         ports:
-        - containerPort: 
+        - containerPort: 9000 
           name: http
         volumeMounts:
         - name: sonar-persistent-storage
