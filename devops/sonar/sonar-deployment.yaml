@@ -14,6 +14,12 @@ spec:
       labels:
         app: sonar-qube
     spec:
+      initContainers:
+      - name: init-sysctl
+        image: busybox
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+        securityContext:
+          privileged: true
       containers:
       - image: sonarqube:lts-community
         name: sonar
@@ -25,7 +31,14 @@ spec:
           name: http
         volumeMounts:
         - name: sonar-storage
-          mountPath: /opt/sonarqube
+          subPath: conf
+          mountPath: /opt/sonarqube/conf
+        - name: sonar-storage
+          subPath: data
+          mountPath: /opt/sonarqube/data
+        - name: sonar-storage
+          subPath: extensions
+          mountPath: /opt/sonarqube/data
         # - name: sonar-config
         #   mountPath: /opt/sonarqube/config
       volumes:
