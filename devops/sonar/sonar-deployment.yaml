@@ -24,7 +24,7 @@ spec:
         - containerPort: 9000 
           name: http
         volumeMounts:
-        - name: sonar-persistent-storage
+        - name: sonar-storage
           mountPath: /opt/sonarqube
         # - name: sonar-config
         #   mountPath: /opt/sonarqube/config
