@@ -17,29 +17,23 @@ spec:
       containers:
       - image: sonarqube:lts-community
         name: sonar
-        env:
-        - name: TZ
-          value: Asia/Shanghai
-        - name: SONAR_JDBC_URL
-          value: "jdbc:postgresql://postgresdb:5432/sonar"
-        - name: SONAR_JDBC_USERNAME
-          value: sonar
-        - name: SONAR_JDBC_PASSWORD
-          value: sonar
+        envFrom:
+        - configMapRef:
+            name: sonar-config
         ports:
         - containerPort: 
           name: http
         volumeMounts:
         - name: sonar-persistent-storage
           mountPath: /opt/sonarqube
-        - name: sonar-config
-          mountPath: /opt/sonarqube/config
+        # - name: sonar-config
+        #   mountPath: /opt/sonarqube/config
       volumes:
       - name: sonar-storage
         persistentVolumeClaim:
           claimName: sonar-pvc
-      - name: mysql-config
-        configMap:
-          name: mysql-config
+      # - name: sonar-config
+      #   configMap:
+      #     name: mysql-config
       
         

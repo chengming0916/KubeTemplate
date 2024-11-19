@@ -6,5 +6,7 @@ matadata:
   labels:
     app: sonar-config
 data:
-  config.yaml: |
-    # 配置文件占位符
+  TZ: "Asia/Shanghai"
+  SONAR_JDBC_URL: "jdbc:postgresql://postgresdb:5432/sonar"
+  SONAR_JDBC_USERNAME: "sonar"
+  SONAR_JDBC_PASSWORD: "sonar"
