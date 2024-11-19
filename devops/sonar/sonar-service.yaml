@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sonar-http
+  name: sonar-qube
   namespace: sonar
   labels:
     app: sonar-qube

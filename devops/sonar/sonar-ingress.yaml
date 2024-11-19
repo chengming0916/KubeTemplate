@@ -29,7 +29,7 @@ metadata:
   name: sonar-ingress
   namespace: sonar
   annotations:
-    traefik.ingress.kubernetes.io/service.stick.cookie: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
 spec:
   entryPoints:
   - websecure
@@ -37,7 +37,7 @@ spec:
   - match: Host(`sonar.example.io`) && PathPrefix(`/`)
     kind: Rule
     services:
-    - name: sonar-http
+    - name: sonar-qube
       passHostHeader: true
       port: 9000
   tls:
