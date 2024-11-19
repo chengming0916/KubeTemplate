@@ -22,7 +22,7 @@ spec:
           privileged: true
       containers:
       - image: sonarqube:lts-community
-        name: sonar
+        name: sonar-qube
         envFrom:
         - configMapRef:
             name: sonar-config
@@ -38,15 +38,8 @@ spec:
           mountPath: /opt/sonarqube/data
         - name: sonar-storage
           subPath: extensions
-          mountPath: /opt/sonarqube/data
-        # - name: sonar-config
-        #   mountPath: /opt/sonarqube/config
+          mountPath: /opt/sonarqube/extensions
       volumes:
       - name: sonar-storage
         persistentVolumeClaim:
           claimName: sonar-pvc
-      # - name: sonar-config
-      #   configMap:
-      #     name: mysql-config
-      
-        
