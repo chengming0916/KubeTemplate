@@ -14,3 +14,20 @@ spec:
   selector:
     app: drone-server
   type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: drone-vault
+  namespace: drone
+  labels:
+    app: drone-vault
+spec:
+  ports:
+  - name: vault-http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: drone-vault
+  type: ClusterIP

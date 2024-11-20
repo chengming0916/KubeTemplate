@@ -16,9 +16,8 @@ spec:
         app: drone-server
     spec:
       containers:
-      - image: drone/drone:2
-        imagePullPolicy: IfNotPresent
-        name: drone-server
+      - name: drone-server
+        image: drone/drone:2
         ports:
         - name: http
           containerPort: 80
@@ -38,9 +37,7 @@ spec:
           claimName: drone-server-pvc
       dnsPolicy: ClusterFirst
       restartPolicy: Always
-
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -60,8 +57,35 @@ spec:
     spec:
       containers:
       - name: drone-runner
-        image: docker.io/drone/drone-runner-kube:latest
-        imagePullPolicy: IfNotPresent
+        image: drone/drone-runner-kube:latest
         envFrom:
         - configMapRef:
             name: drone-runner-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone-vault
+  namespace: drone
+  labels:
+    app: drone-vault
+spec:
+  selector:
+    mtachLabels:
+      app: drone-vault
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: drone-vault
+    spec:
+      containers:
+      - name: drone-vault
+        image: drone/vault:latest
+        ports:
+        - name: http
+          port: 3000
+        envFrom:
+        - configMapRef:
+            name: drone-vault-config
+
