@@ -84,7 +84,8 @@ spec:
         image: drone/vault:latest
         ports:
         - name: http
-          port: 3000
+          containerPort: 3000
+          protocol: TCP
         envFrom:
         - configMapRef:
             name: drone-vault-config
