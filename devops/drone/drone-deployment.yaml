@@ -71,7 +71,7 @@ metadata:
     app: drone-vault
 spec:
   selector:
-    mtachLabels:
+    matchLabels:
       app: drone-vault
   replicas: 1
   template:
