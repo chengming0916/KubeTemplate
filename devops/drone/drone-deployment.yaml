@@ -65,28 +65,28 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: drone-vault
+  name: drone-secrets
   namespace: drone
   labels:
-    app: drone-vault
+    app: drone-secrets
 spec:
   selector:
     matchLabels:
-      app: drone-vault
+      app: drone-secrets
   replicas: 1
   template:
     metadata:
       labels:
-        app: drone-vault
+        app: drone-secrets
     spec:
       containers:
-      - name: drone-vault
-        image: drone/vault:latest
+      - name: drone-secrets
+        image: drone/kubernetes-secrets:latest
         ports:
         - name: http
           containerPort: 3000
           protocol: TCP
         envFrom:
         - configMapRef:
-            name: drone-vault-config
+            name: drone-secrets-config
 

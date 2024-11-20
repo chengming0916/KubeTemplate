@@ -29,18 +29,17 @@ metadata:
   labels:
     app: drone-runner
 data:
-  DRONE_RPC_HOST: "https://drone.example.io"
+  DRONE_RPC_HOST: "https://drone-server:443"
   DRONE_RPC_SECRET: "3841baff0f63aed0d69c7a4f1eff2a9d" # 与drone-server配置中 DRONE_RPC_SECRET 保持一致
-  DRONE_SECRET_PLUGIN_ENDPOINT: "http://drone.drone-vault.svc.cluster.local:3000"
+  DRONE_SECRET_PLUGIN_ENDPOINT: "http://drone-secrets:3000"
   DRONE_SECRET_PLUGIN_TOKEN: "2ddd3070c4b7c6bc4671c266e4be9e75" # openssl rand -hex 16
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: drone-vault-config
+  name: drone-secrets-config
   namespace: drone
   labels:
-    app: drone-vault
+    app: drone-secrets
 data:
-  #DRONE_DEBUG: true
-  DRONE_SECRET: "2ddd3070c4b7c6bc4671c266e4be9e75" # 与drone-runner配置中 DRONE_SECRET_PLUGIN_TOKEN 保持一直
+  SECRET_KEY: "2ddd3070c4b7c6bc4671c266e4be9e75" # 与drone-runner配置中 DRONE_SECRET_PLUGIN_TOKEN 保持一直
