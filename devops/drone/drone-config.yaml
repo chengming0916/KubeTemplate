@@ -15,7 +15,7 @@ data:
   DRONE_GITEA_CLIENT_ID: "" # Gitea添加集成登录ClientId
   DRONE_GITEA_CLIENT_SECRET: "" # Gitea添加集成登录ClientSecret
   DRONE_RPC_SECRET: "3841baff0f63aed0d69c7a4f1eff2a9d"  # openssl rand hex 16
-  DRONE_DEBUG: "true"
+  #DRONE_DEBUG: "true"
   DRONE_DATABASE_DRIVER: postgres
   DRONE_DATABASE_DATASOURCE: postgres://drone:drone@postgres.postgres.svc.cluster.local:5432/drone?sslmode=disable
   DRONE_LOGS_TRACE: "true"

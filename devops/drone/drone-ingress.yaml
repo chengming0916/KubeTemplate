@@ -17,7 +17,7 @@ spec:
     organizations:
     - Example .Inc
   dnsNames:
-  - gitea.example.io
+  - drone.example.io
   issuerRef:
     name: selfsigned-cluster-issuer
     kind: ClusterIssuer
