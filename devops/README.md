@@ -93,8 +93,7 @@ docker配置文件示例
 {
     "registry-mirrors": [
         "https://docker.m.daocloud.io",
-        "https://.bei-jing.aliyuncs.com",
-        "https://tencentyun.com"
+        "https://mirror.ccs.tencentyun.com"
     ],
     "insecure-registries": [
         "https://harbor.example.io"
