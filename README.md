@@ -44,7 +44,7 @@ kubectl apply -f traefik/traefik-ingress.yaml
 
 #### 部署PostgreSQL
 ```bash
-kubectl apply -f postgres/postgres-namespace.yaml
+kubectl create ns postgres
 kubectl apply -f postgres/postgres-pvc-local-path.yaml
 kubectl apply -f postgres/postgres-config.yaml
 kubectl apply -f postgres/postgres-deployment.yaml
@@ -54,10 +54,36 @@ kubectl apply -f postgres/postgres-ingress.yaml
 
 #### 部署Redis
 ```bash
-kubectl apply -f redis/redis-namespace.yaml
+kubectl create ns redis
 kubectl apply -f redis/redis-config.yaml
 kubectl apply -f redis/redis-pvc-local-path.yaml
 kubectl apply -f redis/redis-deployment.yaml
 kubectl apply -f redis/redis-service.yaml
 kubectl apply -f redis/redis-ingress.yaml
+```
+#### 部署MySQL
+```bash
+kubectl apply -f mysql/mysql-pvc-local-path.yaml
+kubectl apply -f mysql/mysql-config.yaml
+kubectl apply -f mysql/mysql-deployment.yaml
+kubectl apply -f mysql/mysql-service.yaml
+kubectl apply -f mysql/mysql-ingress.yaml
+```
+
+#### 部署EMQX
+```bash
+kubectl create ns emqx
+kubectl apply -f emqx/emqx-config.yaml
+kubectl apply -f emqx/emqx-pvc-local-path.yaml
+kubectl apply -f emqx/emqx-deployment.yaml
+kubectl apply -f emqx/emqx-service.yaml
+kubectl apply -f emqx/emqx-ingress.yaml
+```
+
+
+#### 使用NFS
+
+```bash
+sudo mount -o <nfs-ip>:/nfs /nfs # 挂载NFS
+sudo mkdir /nfs/example          # 创建文件夹
 ```
