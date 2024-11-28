@@ -6,7 +6,7 @@ metadata:
   labels:
     app: mysql-config
 data:
-  my.cnf: |
+  mysqld.cnf: |
     [client]
     default-character-set=utf8mb4
     [mysql]
