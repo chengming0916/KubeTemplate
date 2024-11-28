@@ -12,16 +12,12 @@ rules:
 - apiGroups: [""]
   resources: ["pods","pods/log"]
   verbs: ["get", "create", "delete", "list", "watch", "update"]
-  
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: kube-runner
   namespace: drone
-  labels:
-    app: drone-runner
 subjects:
 - kind: ServiceAccount
   name: default
