@@ -10,8 +10,8 @@ spec:
         port: 80 
         expose:
           default: true
-        # nodePort: 80
-        # protocol: TCP
+        nodePort: 80
+        protocol: TCP
         #proxyProtocol:
         #  insecure: true
         redirectTo:
@@ -28,7 +28,7 @@ spec:
       #     default: true
       #   nodePort: 9000
       #   protocol: TCP
-      core-dns:
+      coredns:
         port: 53
         expose:
           default: true
