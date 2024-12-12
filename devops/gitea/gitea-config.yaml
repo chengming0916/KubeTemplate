@@ -31,6 +31,9 @@ data:
   DB_PASSWD: gitea
   REQUIRE_SIGNIN_VIEW: "true" # 仅允许已登录用户查看探索页面 
   ACTIONS_ENABLED: "false"
+
+  GITEA_webhook_ALLOWED_HOST_LIST: *.tjpengan.io
+  GITEA_webhook_SKIP_TLS_VERIFY: "true"
   
   # GITEA_cache_ADAOTER: redis
   # GITEA_cache_HOST: redis://:macaron@redis.redis.svc.cluster.local/0?pool_size=100&idle_timeout=180s
