@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: etcd
+  namespace: etcd
+  labels:
+    app: etcd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etcd
+  template:
+    metadata:
+      labels:
+        app: etcd
+    spec:
+      initContainers:
+
+      containers:
+        - name: etcd
+          image: bitnami/etcd:latest
+          imagePullPolicy: IfNotPresent
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - name: redis-persistent-storage
+              mountPath: /var/lib/redis
+            - name: redis-config
+              mountPath: /usr/local/etc/redis/redis.conf
+              subPath: redis.conf
+          command: [ "redis-server" ,"/usr/local/etc/redis/redis.conf" ]
+          env:
+            - name: TZ
+              value: "Asia/Shanghai"
+            # 允许无身份验证访问
+            - name: ALLOW_NONE_AUTHENTICATION
+              value: "yes"
+      volumes:
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+        - name: redis-persistent-storage
+          persistentVolumeClaim:
+            claimName: redis-pvc
+        - name: redis-config
+          configMap:
+            name: redis-config

@@ -52,6 +52,12 @@ spec:
           #internal: true
         nodePort: 6379
         protocol: TCP
+      etcd:
+        port: 2379
+        expose:
+          default: true
+          #default: false
+          #internal: true
       postgres:
         port: 5432
         expose:
