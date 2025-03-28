@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - /usr/local/docker-volumes/redis/config:/usr/local/etc/redis # 配置目录
+      - /usr/local/docker-volumes/redis/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf

@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  zlmediakit:
+    image: zlmediakit/zlmediakit:master
+    container_name: zlmediakit
+    privileged: true
+    # command: /opt/media/bin/MediaServer -c /opt/media/conf/config.ini # 指定配置文件启动
+    ports:
+      - "1935:1935" # rtmp
+      - "8080:80" # http
+      - "554:554" # rtsp
+      #- "9000:9000/udp" #
+      #- "10000:10000/tcp" #
+      #- "10000:10000/udp"
+      #- "30000-30500:30000-30500/tcp"
+      #- "30000-30500:30000-30500/udp"
+    volumes:
+      - /usr/local/docer-volumes/zlmediakit/config:/opt/media/conf # 配置文件挂载
+    environment:
+      TZ: "Asia/Shanghai"
+    restart: "on-failure:3"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
