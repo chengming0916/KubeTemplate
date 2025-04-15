@@ -20,6 +20,7 @@ data:
   DRONE_DATABASE_DATASOURCE: postgres://drone:drone@postgres.postgres.svc.cluster.local:5432/drone?sslmode=disable
   DRONE_LOGS_TRACE: "true"
   #DRONE_USER_CREATE: "username:admin,admin:true,token:3841baff0f63aed0d69c7a4f1eff2a9d"
+  DRONE_GIT_ALWAYS_AUTH: "true"
 ---
 apiVersion: v1
 kind: ConfigMap
