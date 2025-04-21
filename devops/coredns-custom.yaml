@@ -36,6 +36,7 @@ data:
             127.0.0.1 gitea.example.io
             127.0.0.1 drone.example.io
             127.0.0.1 sonar.example.io
+            127.0.0.1 tekton.example.io
             fallthrough
         }
         prometheus :9153
