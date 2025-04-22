@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: tekton-cert
-  namespace: tekton-pipelines
+  name: argocd-cert
+  namespace: argocd
 spec:
   isCA: false
-  commonName: Example Tekton Pipelines
-  secretName: tekton-secret
+  commonName: Example ArgoCD
+  secretName: argocd-secret
   privateKey:
     algorithm: RSA
     encoding: PKCS1
@@ -17,7 +17,7 @@ spec:
     organizations:
     - Example .Ltd
   dnsNames:
-  - tekton.example.io
+  - argocd.example.io.io
   issuerRef:
     name: selfsigned-cluster-issuer
     kind: ClusterIssuer
@@ -26,19 +26,19 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: tekton-websecure
-  namespace: tekton-pipelines
+  name: argocd-websecure
+  namespace: argocd
   annotations:
     traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
 spec:
   entryPoints:
   - websecure
   routes:
-  - match: Host(`tekton.example.io`) && PathPrefix(`/`)
+  - match: Host(`argocd.example.io`) && PathPrefix(`/`)
     kind: Rule
     services:
-    - name: tekton-dashboard
+    - name: argocd-http
       passHostHeader: true
-      port: 9097
+      port: 443
   tls:
-    secretName: tekton-secret
+    secretName: argocd-secret
