@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frps-config
+  namespace: frp
+  labels:
+    app: frps-config
+data:
+  frps.ini: |
+  [common]
+  # A literal address or host name for IPv6 must be enclosed
+  # in square brackets, as in "[::1]:80", "[ipv6-host]:http" or "[ipv6-host%zone]:80"
+  # For single "bind_addr" field, no need square brackets, like "bind_addr = ::".
+  bind_port = 7000
+
+  # udp port to help make udp hole to penetrate nat
+  bind_udp_port = 7001
+
+  dashboard_port=7500
+  dashboard_user=admin
+  dashboard_pwd=admin
+
+  # if you want to support virtual host, you must set the http port for listening (optional)
+  # Note: http port and https port can be same with bind_port
+  vhost_http_port = 18080
+  vhost_https_port = 4443
+
+  max_pool_count = 50
+
+  # log_file = /usr/local/frp/frps.log
+  # log_level = info
+  # log_max_days = 3
+  authentication_method = token
+  token = admin
+  authentication_timeout = 0
+
+  
+  # only allow frpc to bind ports you list, if you set nothing, there won't be any limit
+  allow_ports = 8000-9000
