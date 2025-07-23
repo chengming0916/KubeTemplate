@@ -15,20 +15,18 @@ spec:
         app: frps
     spec:
       containers:
-      - image: ghcr.io/fatedier/frps:v0.44.0
-        name: frps
-        #env:
-        #- name: ""
-        #  value: ""
+      - name: frps
+        image: ghcr.io/fatedier/frps:v0.44.0
+        command: ["/usr/bin/frps", "-c", "/usr/local/etc/frp/frps.ini"]
         ports:
         - containerPort: 7500
           name: dashboard
           containerPort: 7000
           name: service
-        volumes:
+        volumeMounts:
         - name: frps-config
-          mountPath: /usr/local/etc/frp/frps.ini
-      volumeMounts:
+          mountPath: /usr/local/etc/frp
+      volumes:
       - name: frps-config
         configMap:
           name: frps-config
