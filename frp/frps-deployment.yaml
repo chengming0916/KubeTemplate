@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frps
+  namespace: frp
+  labels:
+    app: frps
+spec:
+  selector:
+    matchLabels:
+      app: frps
+  template:
+    metadata:
+      labels:
+        app: frps
+    spec:
+      containers:
+      - image: ghcr.io/fatedier/frps:v0.44.0
+        name: frps
+        #env:
+        #- name: ""
+        #  value: ""
+        ports:
+        - containerPort: 7500
+          name: dashboard
+          containerPort: 7000
+          name: service
+        volumes:
+        - name: frps-config
+          mountPath: /usr/local/etc/frp/frps.ini
+      volumeMounts:
+      - name: frps-config
+        configMap:
+          name: frps-config
