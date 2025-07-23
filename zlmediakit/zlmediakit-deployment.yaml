@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      app: zlmediakit
+  name: zlmediakit
+  namespace: zlmediakit
+spec:
+  selector:
+    matchLabels:
+      app: zlmediakit
+    template:
+      metadata:
+        labels:
+          app: zlmediakit
+      spec:
+        containers:
+        - image: zlmediakit/zlmediakit:master
+          imagePullPolicy: IfNotPresent
+          name: zlmediakit
