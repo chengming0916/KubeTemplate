@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: tdengine-tcp
+  namespace: tdengine
+spec:
+  entryPoints:
+  - tdengine
+  routes:
+  - match: HostSNI(`*`)
+    services:
+    - name: tdengine
+      port: 3306

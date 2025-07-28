@@ -66,6 +66,14 @@ spec:
           #internal: true
         nodePort: 5432
         protocol: TCP
+      tdengine:
+        port: 6041
+        expose:
+          default: true
+          #default: false
+          #internal: true
+        nodePort: 6041
+        protocol: TCP
     #service:
     #  additionalServices:
     #    internal:
