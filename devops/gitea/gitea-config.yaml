@@ -35,8 +35,8 @@ data:
   GITEA_webhook_ALLOWED_HOST_LIST: *.tjpengan.io
   GITEA_webhook_SKIP_TLS_VERIFY: "true"
 
-  GITEA_packages_ENABLED: "false"
-  GITEA_mirror_ENABLED: "false"
+  GITEA_packages_ENABLED: "false" # 禁用包注册表功能
+  GITE_actions_ENABLED: "false"   # 禁用Actions
   
   # GITEA_cache_ADAOTER: redis
   # GITEA_cache_HOST: redis://:macaron@redis.redis.svc.cluster.local/0?pool_size=100&idle_timeout=180s
