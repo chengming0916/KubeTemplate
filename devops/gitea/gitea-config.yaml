@@ -6,6 +6,10 @@ metadata:
   labels:
     app: gitea
 data:
+  # 环境变量仅在首次启动时生效，如果已生成app.ini配置文件，修改环境变量不会自动覆盖，需：
+  # 1. 停止并删除容器（保留数据卷）
+  # 2. 删除data/gitea/conf/app.ini文件
+  # 3. 重新启动容器使新环境变量生效
   ENABLE_OPENID_SIGNIN: "false" # 禁用OPENID登录
   DISABLE_REGISTRATION: "true" # 禁用注册
   ENABLE_OPENID_SIGNUP: "false" # 禁用OPENID注册 ENABLE_OPENID_SIGNUP: ! DISABLE_REGISTRATION
